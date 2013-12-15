@@ -12,7 +12,7 @@ embed {
 }
 .wrap {
 	width: 200px;
-	margin: 80px auto 0;
+	margin: 2em auto 0;
 }
 html.lt-ie9 .note,
 html.no-js .note,
@@ -38,7 +38,7 @@ html.js.shockwave_flash .note {
 }
 .refresh {
 	display: block;
-	margin-top: 5px;
+	margin-top: .5em;
 	margin-left: -16px;
 	width: 128px;
 	height: 128px;
@@ -74,7 +74,9 @@ html.js.shockwave_flash .note {
 	-o-transform:rotate(270deg);
 }
 
-#noty_topCenter_layout_container {}
+#noty_topCenter_layout_container {
+	margin-top: 12px !important;
+}
 #noty_topCenter_layout_container li {
 	background-color: #a7e69b !important;
 	border: 1px solid #369124 !important;

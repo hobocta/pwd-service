@@ -1,4 +1,4 @@
-(function($) {
+;(function($) {
 	$(document).ready(function() {
 
 		/**
@@ -57,6 +57,7 @@
 			}
 		};
 
+
 		/**
 		 * Если это не старые IE и включен флеш, то вешаем обработку копирования в буфер
 		 * и уведомление об этом
@@ -68,7 +69,7 @@
 
 				var pwd = $(e).text();
 				$(e).zclip({
-					path: '/js/vendor/jquery.zclip.1.1.1/ZeroClipboard.swf',
+					path: 'js/vendor/jquery.zclip.1.1.1/ZeroClipboard.swf',
 					copy: function() {
 						return pwd;
 					},
