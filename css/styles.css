@@ -2,6 +2,8 @@ body {
 	font-family: "Dejavu Sans Mono", "Courier New";
 	color: #8da6ce;
 	background-color: #0c1021;
+	min-width: 360px;
+	position: relative;
 }
 h3 {
 	color: #f8f8b8;
