@@ -1,86 +1,86 @@
 body {
-	font-family: "Dejavu Sans Mono", "Courier New";
-	color: #8da6ce;
-	background-color: #0c1021;
-	min-width: 360px;
-	position: relative;
+    font-family: "Dejavu Sans Mono", "Courier New";
+    color: #8da6ce;
+    background-color: #0c1021;
+    min-width: 360px;
+    position: relative;
 }
 h3 {
-	color: #f8f8b8;
+    color: #f8f8b8;
 }
 a,
 embed {
-	outline: 0;
+    outline: 0;
 }
 .wrap {
-	width: 200px;
-	margin: 2em auto 0;
+    width: 200px;
+    margin: 2em auto 0;
 }
 html.lt-ie9 .note,
 html.no-js .note,
 html.no-shockwave-flash .note {
-	display: none;
+    display: none;
 }
 html.js.shockwave_flash .note {
-	display: block;
+    display: block;
 }
 .note {
-	font-size: 90%;
-	padding: 0 0 .5em 0;
-	color: #d8fa3c;
+    font-size: 90%;
+    padding: 0 0 .5em 0;
+    color: #d8fa3c;
 }
 .pwd.hover {
-	color: #d8fa3c;
+    color: #d8fa3c;
 }
 .pwd.copied {
-	color: #54ce3c;
+    color: #54ce3c;
 }
 .zclip embed {
-	vertical-align: top;
+    vertical-align: top;
 }
 .refresh {
-	display: block;
-	margin-top: .5em;
-	margin-left: -16px;
-	width: 128px;
-	height: 128px;
-	background: url(../images/refresh.png) no-repeat 0 0;
-	cursor: pointer;
+    display: block;
+    margin-top: .5em;
+    margin-left: -16px;
+    width: 128px;
+    height: 128px;
+    background: url(../images/refresh.png) no-repeat 0 0;
+    cursor: pointer;
 }
 .refresh:hover {
-	background-position: 0 -150px;
+    background-position: 0 -150px;
 }
 .refresh:active {
-	background-position: 0 -300px;
+    background-position: 0 -300px;
 }
 
 .refresh.loader {
-	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAn1BMVEUMECEOEygQFi0UGjcTGjYTGTQUGzgVHDoMECINEiYNESQNEiULDyELECIMESMNESULECERFzENEicTGTUOFCkMESQQFSwMEiQPFCoOEiYQFi4QFi8SGTMOEyYPFSoMECMRFzARFzIRGDESGDISGDMTGzgNESMMEiUOEicPFCwPFSsRFjARGDISGTIRFy8TGDMSGTQNEykOEykOFCsPFS10IQG8AAAD5ElEQVRo3u2Y63aqQAyFAVEHUEAUtWpra+39dm7v/2yHFmUymQkwUbvOWcv8tKMfSXb2hDqOXTyOOp1R4Jw0Fp2veDol47Gzi1PmMtpDRieEdKr4jyDieeNvnkVLyHTb206tGfGb/xlvcRtIPu59xji3hLz7ZWzaQFa9Mm7tGKG/D7cZMunt48EKclVBVqIR4leQKRPiXzVBpj0mJJIQP66H5JJhWS5nJSHX9ZBbyRhbqgumEtVBLkAiF9Z+KyFvdZCxZNgbWgxSmdCQ3yCR3N5XgMAqGesQnyutnXn9kJQpBVlKhs+ySBcULDRDHkCxJjwjvtFkjCFAvrdMt4cyztSb8b3M1Vq+9/P5PfrIk5CF6Y4fScYSP6DnRXqbX7pF3CSqjEHvy0/+KNsK6Loq30u/X8Q4RoybbhmeIGS8+ySAexch33jTLwPZzLxbxRxgxEotF15ejKbl9avw1OMS0t2CeypTG49FvoeAb0zuJAOl0lXiJcEF88xiWeJiXY77SpCZfMa0qllWOOUiIwe2qNioyiO+VhEokzmCdLdzYT1X3h1ioJ4InEoh5wtbF8IIrK7dnKCa2TCu+zoj1p/kQ6NY5OJqiDujYwqtMcv2kHF9OyBmiSjtIQjxGtecTUbHgPiXDad/fbDKtQLNeG5x7T4d1vhFuy/c71ozt5rEErGKWn8j8QrTtx3G16Lfl845zqG8H048HJOY91PDyMURfd1LrmcKlhZnrimKFTf0zMHIZeiaQzgTAsLYnyMCkjgeFYzXACq+B0KV6+cxy/UtjXey40k4pyRc7H3HG0ZBDeM5ziEVnxQjNGR8R1gLMWTMSEvFDsJK40POtIeD5tPrAAwSy7eCdVOlAtU+eQ4c1NUsxa7AtvkobW6GfbkCzRaNrYm1c7zGVzXTTTbVEe7swE0lQDUb6IzAdhgNP6GWTGtH1kbuuKeZ8b4i+zZL4VIYDetWRvnXFNcsqFEg8Ia8tj0z/MBozlwykyw2iGZYKynw1zgjMwnNApd6SGq9BHYYjltoVleSEmzYBKEVWfm1NDGra+coyHTg8JiaQI5E2RqDt4gwFPSAJWoTypMJPbiGXyMsWd0CYRMSzUu465V+s+DqRSwzVRxTf04Mgbmylk5oZ7ljhsDtNxgwIEC+2YCCDDJqKFpFCiqxdiiIswbH0kPeaAKHhkB1JNYvAUZ1GiDiABmbH9BkrxHlh1aJpPWQlJ0K4aTGiyLkCizU5UtCgIxDZrlipwkCrEHwFEzd0kaV2PrX7ipBXkFAzIdbLTiBG+C9iNqSjYe5wVnF/01IxLYpzr9oTvq/jJx9dVhNqd2LdBl/AVb2PHF8IO/YAAAAAElFTkSuQmCC');
-	background-position: 50% 50%;
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAMAAABHPGVmAAAAn1BMVEUMECEOEygQFi0UGjcTGjYTGTQUGzgVHDoMECINEiYNESQNEiULDyELECIMESMNESULECERFzENEicTGTUOFCkMESQQFSwMEiQPFCoOEiYQFi4QFi8SGTMOEyYPFSoMECMRFzARFzIRGDESGDISGDMTGzgNESMMEiUOEicPFCwPFSsRFjARGDISGTIRFy8TGDMSGTQNEykOEykOFCsPFS10IQG8AAAD5ElEQVRo3u2Y63aqQAyFAVEHUEAUtWpra+39dm7v/2yHFmUymQkwUbvOWcv8tKMfSXb2hDqOXTyOOp1R4Jw0Fp2veDol47Gzi1PmMtpDRieEdKr4jyDieeNvnkVLyHTb206tGfGb/xlvcRtIPu59xji3hLz7ZWzaQFa9Mm7tGKG/D7cZMunt48EKclVBVqIR4leQKRPiXzVBpj0mJJIQP66H5JJhWS5nJSHX9ZBbyRhbqgumEtVBLkAiF9Z+KyFvdZCxZNgbWgxSmdCQ3yCR3N5XgMAqGesQnyutnXn9kJQpBVlKhs+ySBcULDRDHkCxJjwjvtFkjCFAvrdMt4cyztSb8b3M1Vq+9/P5PfrIk5CF6Y4fScYSP6DnRXqbX7pF3CSqjEHvy0/+KNsK6Loq30u/X8Q4RoybbhmeIGS8+ySAexch33jTLwPZzLxbxRxgxEotF15ejKbl9avw1OMS0t2CeypTG49FvoeAb0zuJAOl0lXiJcEF88xiWeJiXY77SpCZfMa0qllWOOUiIwe2qNioyiO+VhEokzmCdLdzYT1X3h1ioJ4InEoh5wtbF8IIrK7dnKCa2TCu+zoj1p/kQ6NY5OJqiDujYwqtMcv2kHF9OyBmiSjtIQjxGtecTUbHgPiXDad/fbDKtQLNeG5x7T4d1vhFuy/c71ozt5rEErGKWn8j8QrTtx3G16Lfl845zqG8H048HJOY91PDyMURfd1LrmcKlhZnrimKFTf0zMHIZeiaQzgTAsLYnyMCkjgeFYzXACq+B0KV6+cxy/UtjXey40k4pyRc7H3HG0ZBDeM5ziEVnxQjNGR8R1gLMWTMSEvFDsJK40POtIeD5tPrAAwSy7eCdVOlAtU+eQ4c1NUsxa7AtvkobW6GfbkCzRaNrYm1c7zGVzXTTTbVEe7swE0lQDUb6IzAdhgNP6GWTGtH1kbuuKeZ8b4i+zZL4VIYDetWRvnXFNcsqFEg8Ia8tj0z/MBozlwykyw2iGZYKynw1zgjMwnNApd6SGq9BHYYjltoVleSEmzYBKEVWfm1NDGra+coyHTg8JiaQI5E2RqDt4gwFPSAJWoTypMJPbiGXyMsWd0CYRMSzUu465V+s+DqRSwzVRxTf04Mgbmylk5oZ7ljhsDtNxgwIEC+2YCCDDJqKFpFCiqxdiiIswbH0kPeaAKHhkB1JNYvAUZ1GiDiABmbH9BkrxHlh1aJpPWQlJ0K4aTGiyLkCizU5UtCgIxDZrlipwkCrEHwFEzd0kaV2PrX7ipBXkFAzIdbLTiBG+C9iNqSjYe5wVnF/01IxLYpzr9oTvq/jJx9dVhNqd2LdBl/AVb2PHF8IO/YAAAAAElFTkSuQmCC");
+    background-position: 50% 50%;
 }
 .rotate {
-	-webkit-transition-duration: 0.8s;
-	-moz-transition-duration: 0.8s;
-	-o-transition-duration: 0.8s;
-	transition-duration: 0.8s;
-	-webkit-transition-property: -webkit-transform;
-	-moz-transition-property: -moz-transform;
-	-o-transition-property: -o-transform;
-	transition-property: transform;
-	overflow: hidden;
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+    overflow: hidden;
  }
 
 .rotate:hover {
-	-webkit-transform:rotate(270deg);
-	-moz-transform:rotate(270deg);
-	-o-transform:rotate(270deg);
+    -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    -o-transform:rotate(270deg);
 }
 
 #noty_topCenter_layout_container {
-	margin-top: 12px !important;
+    margin-top: 12px !important;
 }
 #noty_topCenter_layout_container li {
-	background-color: #a7e69b !important;
-	border: 1px solid #369124 !important;
-	color: #225a17 !important;
+    background-color: #a7e69b !important;
+    border: 1px solid #369124 !important;
+    color: #225a17 !important;
 }
