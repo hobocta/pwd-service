@@ -21,11 +21,9 @@ embed {
 }
 html.lt-ie9 .note,
 html.no-js .note,
-html.no-shockwave-flash .note {
-	display: none;
-}
+html.no-shockwave-flash .note,
 html.js.shockwave_flash .note {
-	display: block;
+	visibility: hidden;
 }
 .note {
 	font-size: 90%;
