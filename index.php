@@ -27,7 +27,7 @@
 
     <div class="wrap">
 
-        <p class="note">Клик на пароль скопирует его в буфер обмена.</p>
+        <p class="note">Клик на пароль скопирует его в буфер</p>
 
         <?php
         if (!include("class/class.php") ) {
