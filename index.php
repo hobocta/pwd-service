@@ -71,5 +71,12 @@
     </script>
     <script src="js/vendor/jquery.noty.packaged.min.js"></script>
 
+    <?php
+    $filename = "more/include.php";
+    if (file_exists($filename)) {
+        include("more/include.php");
+    }
+    ?>
+
 </body>
 </html>
