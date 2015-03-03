@@ -10,7 +10,7 @@ class Pwd {
 	 * если $checkForExtra == true, то в пароле обязательно будет страшный знак препинания
 	 * если $checkForExtra == false, то в пароле обязательно не будет страшных знаков препинания
 	 */
-	function createAndCheck($length, $checkForNumbers, $checkForMarks, $checkForExtra) {
+	function createAndCheck($length = 12, $checkForNumbers = true, $checkForMarks = true, $checkForExtra = false) {
 		$symbols = array();
 		$symbols["letters"] = array(
 			"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
