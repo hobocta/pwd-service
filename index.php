@@ -10,12 +10,6 @@
 	<title>Online генератор паролей</title>
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script>window.jQuery || document.write("<script src='js/vendor/jquery.1.10.1.min.js'><\/script>")</script>
-	<script src="js/vendor/modernizr.2.7.1.min.js"></script>
-	<script src="js/vendor/jquery-migrate-1.2.1.min.js"></script>
-	<script src="js/vendor/flash_detect_min.js"></script>
-	<script src="js/scripts.js"></script>
 </head>
 <body>
 	<div class="wrap">
@@ -40,7 +34,7 @@
 						$_REQUEST['num'] = $method["num"];
 						$_REQUEST['marks'] = $method["marks"];
 						$_REQUEST['extra'] = $method["extra"];
-						echo include("generate.php");
+						require "generate.php";
 					?></span>
 				</p>
 				<?
@@ -48,11 +42,17 @@
 		}
 		?>
 	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write("<script src='js/vendor/jquery.1.10.1.min.js'><\/script>")</script>
+	<script src="js/vendor/modernizr.2.7.1.min.js"></script>
+	<script src="js/vendor/jquery-migrate-1.2.1.min.js"></script>
 	<script>
 		($.browser.msie && $.browser.version < 9)
 		|| document.write("<script src='js/vendor/jquery.zclip.1.1.1/jquery.zclip.min.js'><\/script>")
 	</script>
 	<script src="js/vendor/jquery.noty.packaged.min.js"></script>
+	<script src="js/vendor/flash_detect_min.js"></script>
+	<script src="js/scripts.js"></script>
 	<?php
 	$filename = "more/include.php";
 	if (file_exists($filename)) {
