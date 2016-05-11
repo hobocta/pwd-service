@@ -14,27 +14,27 @@
 <body>
 	<div class="wrap">
 		<p class="note">Кликни, чтобы скопировать пароль</p>
-		<?php
+		<?
 		foreach (array(8, 12, 16) as $length) {
 			?>
 			<h3><?= $length ?></h3>
 			<?
 			foreach (
 				array(
-					array("num" => true, "marks" => false, "extra" => false),
-					array("num" => true, "marks" => true,  "extra" => false),
-					array("num" => true, "marks" => true,  "extra" => true),
+					array('num' => true, 'marks' => false, 'extra' => false),
+					array('num' => true, 'marks' => true,  'extra' => false),
+					array('num' => true, 'marks' => true,  'extra' => true),
 				) as $method
 			) {
 				?>
 				<p>
-					<span class="pwd" data-length="<?= $length ?>" data-num="<?= (int) $method["num"] ?>"
-					data-marks="<?= (int) $method["marks"] ?>" data-extra="<?= (int) $method["extra"] ?>"><?
+					<span class="pwd" data-length="<?= $length ?>" data-num="<?= (int) $method['num'] ?>"
+					data-marks="<?= (int) $method['marks'] ?>" data-extra="<?= (int) $method['extra'] ?>"><?
 						$_REQUEST['length'] = $length;
-						$_REQUEST['num'] = $method["num"];
-						$_REQUEST['marks'] = $method["marks"];
-						$_REQUEST['extra'] = $method["extra"];
-						require "generate.php";
+						$_REQUEST['num'] = $method['num'];
+						$_REQUEST['marks'] = $method['marks'];
+						$_REQUEST['extra'] = $method['extra'];
+						require 'generate.php';
 					?></span>
 				</p>
 				<?
@@ -53,10 +53,10 @@
 	<script src="js/vendor/jquery.noty.packaged.min.js"></script>
 	<script src="js/vendor/flash_detect_min.js"></script>
 	<script src="js/scripts.js"></script>
-	<?php
+	<?
 	$filename = "more/include.php";
 	if (file_exists($filename)) {
-		include("more/include.php");
+		include('more/include.php');
 	}
 	?>
 </body>

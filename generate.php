@@ -1,6 +1,6 @@
 <?
-if (!require_once("class/class.php") ) {
-	die("Не удалось подгрузить класс");
+if (!require_once('class/class.php') ) {
+	die('Не удалось подгрузить класс');
 }
 if (
 	empty($_REQUEST['length'])
@@ -8,7 +8,7 @@ if (
 	|| !isset($_REQUEST['marks'])
 	|| !isset($_REQUEST['extra'])
 ) {
-	die("Пустой или неполный запрос");
+	die('Пустой или неполный запрос');
 }
 echo Pwd::createAndCheck(
 	(int) $_REQUEST['length'],
@@ -16,4 +16,3 @@ echo Pwd::createAndCheck(
 	(bool) $_REQUEST['marks'],
 	(bool) $_REQUEST['extra']
 );
-?>
