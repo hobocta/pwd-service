@@ -160,7 +160,7 @@ class Pwd
 	 *
 	 * @return string
 	 */
-	public static function generate($length, array $symbols)
+	private static function generate($length, array $symbols)
 	{
 		$pwd = null;
 
