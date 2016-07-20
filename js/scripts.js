@@ -1,6 +1,5 @@
-;(function($) {
+(function($) {
 	$(document).ready(function() {
-
 
 		/**
 		 * Проверяем наличие флеша
@@ -9,7 +8,6 @@
 		if (navigator.plugins['Shockwave Flash']) {
 			$('html').removeClass('no-shockwave-flash').addClass('shockwave-flash');
 		}
-
 
 		/**
 		 * Определяем браузер
@@ -26,9 +24,8 @@
 			browser = 'mozilla';
 		}
 
-
 		/**
-		 * Функция показывает noty
+		 * Функция вывода уведомления
 		 */
 
 		// флаг факта открытия хотя бы одного уведомления
@@ -60,12 +57,11 @@
 			return this;
 		};
 
-
 		/**
 		 * Функция получения нового пароля
 		 */
 
-		$.fn.netNewPwd = function() {
+		$.fn.getPwd = function() {
 			var e = this;
 			$.ajax({
 				url: 'generate.php',
@@ -88,7 +84,6 @@
 			return this;
 		};
 
-
 		/**
 		 * zClip run
 		 */
@@ -104,11 +99,10 @@
 					$(e)
 						.addClass('copied')
 						.alert()
-						.netNewPwd();
+						.getPwd();
 				}
 			});
 		};
-
 
 		/**
 		 * Если это не старые IE и включен флеш, то вешаем обработку копирования в буфер
