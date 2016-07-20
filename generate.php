@@ -1,7 +1,7 @@
 <?
 use Hobocta\Pwd\Pwd;
 
-if (!require_once('class/class.php')) {
+if (!require_once('pwd/pwd.php')) {
 	throw new Exception('Не удалось подгрузить класс');
 }
 
