@@ -22,7 +22,7 @@ if (!require_once('pwd/pwd.php')) {
 	<div class="wrap">
 		<p class="note">Кликни, чтобы скопировать пароль</p>
 		<?foreach (array(8, 12, 16) as $length):?>
-			<h3><?= $length ?></h3>
+			<h3><?=$length?></h3>
 			<?foreach (array(
 				array('number' => true, 'mark' => false, 'extra' => false),
 				array('number' => true, 'mark' => true,  'extra' => false),
