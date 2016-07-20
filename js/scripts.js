@@ -1,12 +1,14 @@
 (function($) {
 	$(document).ready(function() {
 
+		var html = $('html');
+
 		/**
 		 * Проверяем наличие флеша
 		 */
 
 		if (navigator.plugins['Shockwave Flash']) {
-			$('html').removeClass('no-shockwave-flash').addClass('shockwave-flash');
+			html.removeClass('no-shockwave-flash').addClass('shockwave-flash');
 		}
 
 		/**
@@ -109,7 +111,7 @@
 		 * и уведомление об этом
 		 */
 		if (
-			!$('html').hasClass('lt-ie9') &&
+			!html.hasClass('lt-ie9') &&
 			navigator.plugins['Shockwave Flash']
 		) {
 			var pwds = $('.pwd');
