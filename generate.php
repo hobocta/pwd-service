@@ -1,16 +1,20 @@
 <?
-if (!require_once('class/class.php') ) {
-	die('Не удалось подгрузить класс');
+use Hobocta\Pwd\Pwd;
+
+if (!require_once('class/class.php')) {
+	throw new Exception('Не удалось подгрузить класс');
 }
+
 if (
 	empty($_REQUEST['length'])
 	|| !isset($_REQUEST['num'])
 	|| !isset($_REQUEST['marks'])
 	|| !isset($_REQUEST['extra'])
 ) {
-	die('Пустой или неполный запрос');
+	throw new Exception('Пустой или неполный запрос');
 }
-echo Pwd::createAndCheck(
+
+echo Pwd::get(
 	(int) $_REQUEST['length'],
 	(bool) $_REQUEST['num'],
 	(bool) $_REQUEST['marks'],
