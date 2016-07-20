@@ -42,18 +42,10 @@ class Pwd
 
 		$symbols['all'] = self::getSymbolsByParams($symbols, $check);
 
-		$has = array(
-			'number' => null,
-			'mark'   => null,
-			'extra'  => null,
-		);
-
 		$pwd = null;
 
-		while (self::isValid($pwd, $check, $has)) {
+		while (self::isValid($pwd, $check, $symbols)) {
 			$pwd = self::generate($length, $symbols);
-
-			$has = self::check($pwd, $symbols, $check);
 		}
 
 		return $pwd;
@@ -83,7 +75,7 @@ class Pwd
 	 *
 	 * @return array
 	 */
-	private static function check($pwd, $symbols, $check)
+	private static function check($pwd, array $symbols, array $check)
 	{
 		$has = array(
 			'number' => false,
@@ -92,24 +84,24 @@ class Pwd
 		);
 
 		if ($check['number']) {
-			foreach ($symbols['numbers'] as $value) {
-				if (strpos($pwd, $value) !== false) {
+			foreach ($symbols['numbers'] as $char) {
+				if (strpos($pwd, (string) $char) !== false) {
 					$has['number'] = true;
 				}
 			}
 		}
 
 		if ($check['mark']) {
-			foreach ($symbols['marks'] as $value) {
-				if (strpos($pwd, $value) !== false) {
+			foreach ($symbols['marks'] as $char) {
+				if (strpos($pwd, $char) !== false) {
 					$has['mark'] = true;
 				}
 			}
 		}
 
 		if ($check['extra']) {
-			foreach ($symbols['extra'] as $value) {
-				if (strpos($pwd, $value) !== false) {
+			foreach ($symbols['extra'] as $char) {
+				if (strpos($pwd, $char) !== false) {
 					$has['extra'] = true;
 				}
 			}
@@ -126,7 +118,7 @@ class Pwd
 	 *
 	 * @return array
 	 */
-	private static function getSymbolsByParams($symbols, $check)
+	private static function getSymbolsByParams(array $symbols, array $check)
 	{
 		return array_merge(
 			$symbols['letters'],
@@ -141,15 +133,20 @@ class Pwd
 	 *
 	 * @param string $pwd
 	 * @param array $check
-	 * @param array $has
+	 * @param array $symbols
 	 *
 	 * @return bool
 	 */
-	private static function isValid($pwd, $check, $has)
+	private static function isValid($pwd, array $check, array $symbols)
 	{
+		if (is_null($pwd)) {
+			return true;
+		}
+
+		$has = self::check($pwd, $symbols, $check);
+
 		return (
-			is_null($pwd)
-			|| ($check['number'] && (is_null($has['number']) || !$has['number']))
+			($check['number'] && (is_null($has['number']) || !$has['number']))
 			|| ($check['mark'] && (is_null($has['mark']) || !$has['mark']))
 			|| ($check['extra'] && (is_null($has['extra']) || !$has['extra']))
 		);
@@ -163,7 +160,7 @@ class Pwd
 	 *
 	 * @return string
 	 */
-	public static function generate($length, $symbols)
+	public static function generate($length, array $symbols)
 	{
 		$pwd = null;
 
