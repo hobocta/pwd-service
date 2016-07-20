@@ -1,5 +1,5 @@
 body {
-	font-family: 'Dejavu Sans Mono', 'Courier New';
+	font-family: 'Dejavu Sans Mono', 'Courier New', sans-serif;
 	position: relative;
 	min-width: 360px;
 	color: #8da6ce;
@@ -43,24 +43,6 @@ html.js.shockwave_flash .note {
 
 .zclip embed {
 	vertical-align: top;
-}
-
-.rotate {
-	overflow: hidden;
-	-webkit-transition-duration: .8s;
-	-moz-transition-duration: .8s;
-	-o-transition-duration: .8s;
-	transition-duration: .8s;
-	-webkit-transition-property: -webkit-transform;
-	-moz-transition-property: -moz-transform;
-	-o-transition-property: -o-transform;
-	transition-property: transform;
-}
-
-.rotate:hover {
-	-webkit-transform: rotate(270deg);
-	-moz-transform: rotate(270deg);
-	-o-transform: rotate(270deg);
 }
 
 #noty_topCenter_layout_container {
