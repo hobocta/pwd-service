@@ -1,3 +1,10 @@
+<?
+use Hobocta\Pwd\Pwd;
+
+if (!require_once('pwd/pwd.php')) {
+	throw new Exception('Не удалось подгрузить класс');
+}
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js no-shockwave-flash lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js no-shockwave-flash lt-ie9 lt-ie8"> <![endif]-->
@@ -14,33 +21,25 @@
 <body>
 	<div class="wrap">
 		<p class="note">Кликни, чтобы скопировать пароль</p>
-		<?
-		foreach (array(8, 12, 16) as $length) {
-			?>
+		<?foreach (array(8, 12, 16) as $length):?>
 			<h3><?= $length ?></h3>
-			<?
-			foreach (
-				array(
-					array('num' => true, 'marks' => false, 'extra' => false),
-					array('num' => true, 'marks' => true,  'extra' => false),
-					array('num' => true, 'marks' => true,  'extra' => true),
-				) as $method
-			) {
-				?>
+			<?foreach (array(
+				array('number' => true, 'mark' => false, 'extra' => false),
+				array('number' => true, 'mark' => true,  'extra' => false),
+				array('number' => true, 'mark' => true,  'extra' => true),
+			) as $check):?>
 				<p>
-					<span class="pwd" data-length="<?= $length ?>" data-num="<?= (int) $method['num'] ?>"
-					data-marks="<?= (int) $method['marks'] ?>" data-extra="<?= (int) $method['extra'] ?>"><?
-						$_REQUEST['length'] = $length;
-						$_REQUEST['num'] = $method['num'];
-						$_REQUEST['marks'] = $method['marks'];
-						$_REQUEST['extra'] = $method['extra'];
-						require 'generate.php';
-					?></span>
+					<?= sprintf(
+						'<span class="pwd" data-length="%s" data-number="%s" data-mark="%s" data-extra="%s">%s</span>',
+						$length,
+						(int) $check['number'],
+						(int) $check['mark'],
+						(int) $check['extra'],
+						Pwd::get($length, $check)
+					)?>
 				</p>
-				<?
-			}
-		}
-		?>
+			<?endforeach?>
+		<?endforeach?>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write("<script src='js/vendor/jquery.1.10.1.min.js'><\/script>")</script>
@@ -53,11 +52,9 @@
 	<script src="js/vendor/jquery.noty.packaged.min.js"></script>
 	<script src="js/vendor/flash_detect_min.js"></script>
 	<script src="js/scripts.js"></script>
-	<?
-	$filename = "more/include.php";
-	if (file_exists($filename)) {
-		include('more/include.php');
-	}
-	?>
+	<?$include = 'more/include.php'?>
+	<?if (file_exists($include)):?>
+		<?include($include)?>
+	<?endif?>
 </body>
 </html>

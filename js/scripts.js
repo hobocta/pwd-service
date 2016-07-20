@@ -71,8 +71,8 @@
 				url: 'generate.php',
 				data: {
 					length: $(e).data('length'),
-					num: $(e).data('num'),
-					marks: $(e).data('marks'),
+					number: $(e).data('number'),
+					mark: $(e).data('mark'),
 					extra: $(e).data('extra')
 				},
 				success: function(data) {

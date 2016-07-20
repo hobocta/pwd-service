@@ -7,8 +7,8 @@ if (!require_once('pwd/pwd.php')) {
 
 if (
 	empty($_REQUEST['length'])
-	|| !isset($_REQUEST['num'])
-	|| !isset($_REQUEST['marks'])
+	|| !isset($_REQUEST['number'])
+	|| !isset($_REQUEST['mark'])
 	|| !isset($_REQUEST['extra'])
 ) {
 	throw new Exception('Пустой или неполный запрос');
@@ -17,8 +17,8 @@ if (
 echo Pwd::get(
 	(int) $_REQUEST['length'],
 	array(
-		'number' => (bool) $_REQUEST['num'],
-		'mark'   => (bool) $_REQUEST['marks'],
+		'number' => (bool) $_REQUEST['number'],
+		'mark'   => (bool) $_REQUEST['mark'],
 		'extra'  => (bool) $_REQUEST['extra'],
 	)
 );
