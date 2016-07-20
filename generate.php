@@ -16,7 +16,9 @@ if (
 
 echo Pwd::get(
 	(int) $_REQUEST['length'],
-	(bool) $_REQUEST['num'],
-	(bool) $_REQUEST['marks'],
-	(bool) $_REQUEST['extra']
+	array(
+		'number' => (bool) $_REQUEST['num'],
+		'mark'   => (bool) $_REQUEST['marks'],
+		'extra'  => (bool) $_REQUEST['extra'],
+	)
 );

@@ -10,37 +10,25 @@ class Pwd
 	/**
 	 * Создаёт и проверяет пароль
 	 *
-	 * Метод вернёт пароль с длинной $length,
-	 * если $checkForNumber == true, то в пароле обязательно будет цифра
-	 * если $checkForNumber == false, то в пароле не будет цифр
-	 * если $checkForMark == true, то в пароле обязательно будет знак препинания
-	 * если $checkForMark == false, то в пароле обязательно не будет знаков препинания
-	 * если $checkForExtra == true, то в пароле обязательно будет страшный знак препинания
-	 * если $checkForExtra == false, то в пароле обязательно не будет страшных знаков препинания
+	 * Если $check['number'] == true, то в пароле обязательно будет цифра
+	 * Если $check['number'] == true, то в пароле обязательно будет знак препинания
+	 * Если $check['number'] == true, то в пароле обязательно будет страшный знак препинания
 	 *
-	 * @param int $length
-	 * @param bool $checkForNumber
-	 * @param bool $checkForMark
-	 * @param bool $checkForExtra
+	 * @param int $length - длина пароля
+	 * @param array $check
 	 *
 	 * @return string
 	 */
 	public static function get(
 		$length = 12,
-		$checkForNumber = true,
-		$checkForMark = true,
-		$checkForExtra = false
+		array $check = array(
+			'number' => true,
+			'mark'   => true,
+			'extra'  => false,
+		)
 	)
 	{
-		$check = array(
-			'number' => $checkForNumber,
-			'mark'   => $checkForMark,
-			'extra'  => $checkForExtra,
-		);
-
-		$symbols = self::getSymbols();
-
-		$symbols['all'] = self::getSymbolsByParams($symbols, $check);
+		$symbols = self::getSymbols($check);
 
 		$pwd = null;
 
@@ -54,16 +42,22 @@ class Pwd
 	/**
 	 * Возвращает список массивов символов
 	 *
+	 * @param array $check
+	 *
 	 * @return array
 	 */
-	private static function getSymbols()
+	private static function getSymbols(array $check)
 	{
-		return array(
-			'letters' => array_merge(range('a', 'z'), range('A', 'Z')),
-			'numbers' => range(0, 9),
-			'marks'   => array('.', ',', '+', '-', '_', '!', '@'),
-			'extra'   => array('(', ')', '[', ']', '{', '}', '?', '&', '^', '%', '*', '$', '/', '|', '`', '~'),
+		$symbols = array(
+			'letter' => array_merge(range('a', 'z'), range('A', 'Z')),
+			'number' => range(0, 9),
+			'mark'   => array('.', ',', '+', '-', '_', '!', '@'),
+			'extra'  => array('(', ')', '[', ']', '{', '}', '?', '&', '^', '%', '*', '$', '/', '|', '`', '~'),
 		);
+
+		$symbols['all'] = self::getSymbolsByParams($symbols, $check);
+
+		return $symbols;
 	}
 
 	/**
@@ -77,32 +71,35 @@ class Pwd
 	 */
 	private static function check($pwd, array $symbols, array $check)
 	{
-		$has = array(
-			'number' => false,
-			'mark'   => false,
-			'extra'  => false,
-		);
+		$has = array();
 
-		if ($check['number']) {
-			foreach ($symbols['numbers'] as $char) {
+		foreach (array('number', 'mark', 'extra') as $key) {
+			$has[$key] = self::checkSymbols($pwd, $symbols, $check, $key);
+		}
+
+		return $has;
+	}
+
+	/**
+	 * Проверяет наличие в пароле символа из указанного набора
+	 *
+	 * @param $pwd
+	 * @param array $symbols
+	 * @param array $check
+	 * @param $key
+	 *
+	 * @return bool
+	 */
+	private static function checkSymbols($pwd, array $symbols, array $check, $key)
+	{
+		$has = false;
+
+		if ($check[$key]) {
+			foreach ($symbols[$key] as $char) {
 				if (strpos($pwd, (string) $char) !== false) {
-					$has['number'] = true;
-				}
-			}
-		}
+					$has = true;
 
-		if ($check['mark']) {
-			foreach ($symbols['marks'] as $char) {
-				if (strpos($pwd, $char) !== false) {
-					$has['mark'] = true;
-				}
-			}
-		}
-
-		if ($check['extra']) {
-			foreach ($symbols['extra'] as $char) {
-				if (strpos($pwd, $char) !== false) {
-					$has['extra'] = true;
+					break;
 				}
 			}
 		}
@@ -121,9 +118,9 @@ class Pwd
 	private static function getSymbolsByParams(array $symbols, array $check)
 	{
 		return array_merge(
-			$symbols['letters'],
-			$check['number'] ? $symbols['numbers'] : array(),
-			$check['mark'] ? $symbols['marks'] : array(),
+			$symbols['letter'],
+			$check['number'] ? $symbols['number'] : array(),
+			$check['mark'] ? $symbols['mark'] : array(),
 			$check['extra'] ? $symbols['extra'] : array()
 		);
 	}
@@ -166,11 +163,11 @@ class Pwd
 
 		$countAll = count($symbols['all']) - 1;
 
-		$countS = count($symbols['letters']) - 1;
+		$countS = count($symbols['letter']) - 1;
 
 		for ($i = 0; $i < $length; $i++) {
 			if ($i == 0 || $i == $length - 1) {
-				$pwd .= $symbols['letters'][rand(0, $countS)];
+				$pwd .= $symbols['letter'][rand(0, $countS)];
 			} else {
 				$pwd .= $symbols['all'][rand(0, $countAll)];
 			}
