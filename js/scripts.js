@@ -62,22 +62,22 @@
 		 */
 
 		$.fn.getPwd = function() {
-			var e = this;
+			var item = $(this);
 			$.ajax({
 				url: 'generate.php',
 				data: {
-					length: $(e).data('length'),
-					number: $(e).data('number'),
-					mark: $(e).data('mark'),
-					extra: $(e).data('extra')
+					length: item.data('length'),
+					number: item.data('number'),
+					mark: item.data('mark'),
+					extra: item.data('extra')
 				},
 				success: function(data) {
 					setTimeout(function() {
-						$(e).removeClass('copied');
-						$(e).siblings('.zclip').remove();
-						$(e).text(data);
-						$(e).unbind('zClip_copy zClip_beforeCopy zClip_afterCopy');
-						$(e).zClipRun();
+						item.removeClass('copied');
+						item.siblings('.zclip').remove();
+						item.text(data);
+						item.unbind('zClip_copy zClip_beforeCopy zClip_afterCopy');
+						item.zClipRun();
 					}, 1700);
 				}
 			});
@@ -89,14 +89,14 @@
 		 */
 
 		$.fn.zClipRun = function() {
-			var e = this;
-			$(e).zclip({
+			var item = $(this);
+			item.zclip({
 				path: 'js/vendor/jquery.zclip.1.1.1/ZeroClipboard.swf',
 				copy: function() {
-					return $(e).text();
+					return item.text();
 				},
 				afterCopy: function() {
-					$(e)
+					item
 						.addClass('copied')
 						.alert()
 						.getPwd();
@@ -113,8 +113,8 @@
 			navigator.plugins['Shockwave Flash']
 		) {
 			var pwds = $('.pwd');
-			pwds.each(function(i, e) {
-				$(e).zClipRun();
+			pwds.each(function(index, item) {
+				$(item).zClipRun();
 			});
 		}
 
