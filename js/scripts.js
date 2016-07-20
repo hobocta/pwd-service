@@ -12,21 +12,6 @@
 		}
 
 		/**
-		 * Определяем браузер
-		 */
-
-		var browser;
-		if ($.browser.webkit || $.browser.safari) {
-			browser = 'webkit';
-		} else if ($.browser.opera) {
-			browser = 'opera';
-		} else if ($.browser.msie) {
-			browser = 'ie';
-		} else if ($.browser.mozilla) {
-			browser = 'mozilla';
-		}
-
-		/**
 		 * Функция вывода уведомления
 		 */
 
