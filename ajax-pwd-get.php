@@ -14,7 +14,7 @@ if (
 	throw new Exception('Пустой или неполный запрос');
 }
 
-echo Pwd::get(
+$pwd = Pwd::get(
 	(int) $_REQUEST['length'],
 	array(
 		'number' => (bool) $_REQUEST['number'],
@@ -22,3 +22,5 @@ echo Pwd::get(
 		'extra'  => (bool) $_REQUEST['extra'],
 	)
 );
+
+echo json_encode(array('pwd' => $pwd));

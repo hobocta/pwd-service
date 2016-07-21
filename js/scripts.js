@@ -51,21 +51,26 @@
 		$.fn.getPwd = function() {
 			var item = $(this);
 			$.ajax({
-				url: 'generate.php',
+				url: 'ajax-pwd-get.php',
 				data: {
 					length: item.data('length'),
 					number: item.data('number'),
 					mark: item.data('mark'),
 					extra: item.data('extra')
 				},
+				dataType: 'json',
 				success: function(data) {
-					setTimeout(function() {
-						item.removeClass('copied');
-						item.siblings('.zclip').remove();
-						item.text(data);
-						item.unbind('zClip_copy zClip_beforeCopy zClip_afterCopy');
-						item.zClipRun();
-					}, 1700);
+					if (data.pwd) {
+						setTimeout(function() {
+							item.removeClass('copied');
+							item.siblings('.zclip').remove();
+							item.text(data.pwd);
+							item.unbind('zClip_copy zClip_beforeCopy zClip_afterCopy');
+							item.zClipRun();
+						}, 1700);
+					} else {
+						alert('Error');
+					}
 				}
 			});
 			return this;
