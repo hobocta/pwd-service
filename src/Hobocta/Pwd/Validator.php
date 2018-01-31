@@ -81,7 +81,7 @@ class Validator
         $has = false;
 
         foreach ($symbols as $char) {
-            if (strpos($pwd, $char) !== false) {
+            if (strpos($pwd, (string)$char) !== false) {
                 $has = true;
 
                 break;
