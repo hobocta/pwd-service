@@ -5,10 +5,10 @@ namespace Hobocta\Pwd;
 /**
  * Класс для управления символами пароля
  *
- * Class Symbols
+ * Class SymbolsManager
  * @package Hobocta\Pwd
  */
-class Symbols
+class SymbolsManager
 {
     /**
      * @var ParametersInterface
@@ -16,7 +16,7 @@ class Symbols
     private $parameters;
 
     /**
-     * Symbols constructor.
+     * SymbolsManager constructor.
      * @param ParametersInterface $parameters
      */
     public function __construct(ParametersInterface $parameters)

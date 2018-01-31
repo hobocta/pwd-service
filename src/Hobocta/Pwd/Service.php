@@ -37,7 +37,7 @@ class Service
      */
     public function generate(ParametersInterface $parameters)
     {
-        $symbols = new Symbols($parameters);
+        $symbols = new SymbolsManager($parameters);
 
         $symbolSet = $symbols->getSymbols();
 
