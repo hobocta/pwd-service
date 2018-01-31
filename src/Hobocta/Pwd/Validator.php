@@ -61,9 +61,9 @@ class Validator
     private function check($pwd)
     {
         $has = array(
-            'number' => $this->parameters->isNumber() || $this->checkSymbols($pwd, $this->symbols->getMark()),
-            'mark' => $this->parameters->isMark() || $this->checkSymbols($pwd, $this->symbols->getMark()),
-            'extra' => $this->parameters->isExtra() || $this->checkSymbols($pwd, $this->symbols->getExtra()),
+            'number' => $this->parameters->isNumber() && $this->checkSymbols($pwd, $this->symbols->getNumber()),
+            'mark' => $this->parameters->isMark() && $this->checkSymbols($pwd, $this->symbols->getMark()),
+            'extra' => $this->parameters->isExtra() && $this->checkSymbols($pwd, $this->symbols->getExtra()),
         );
 
         return $has;
