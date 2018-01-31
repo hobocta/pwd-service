@@ -64,10 +64,11 @@ $(function () {
             },
             dataType: 'json',
             /**
+             * @param {boolean} data.error
              * @param {string} data.pwd
              */
             success: function (data) {
-                if (data.pwd) {
+                if (!data.error && data.pwd) {
                     setTimeout(function () {
                         item.removeClass('copied');
                         item.siblings('.zclip').remove();
