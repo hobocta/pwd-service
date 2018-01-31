@@ -1,8 +1,6 @@
 <?php
 
-use Hobocta\Pwd\Generator;
-use Hobocta\Pwd\Parameters;
-use Hobocta\Pwd\Service;
+use Hobocta\Pwd;
 
 require_once '../src/autoload.php';
 
@@ -21,9 +19,9 @@ if (
 ) {
     $result['error'] = true;
 } else {
-    $service = new Service(new Generator);
+    $service = new Pwd\Service(new Pwd\Generator);
 
-    $parameters = new Parameters(
+    $parameters = new Pwd\Parameters(
         filter_var($_REQUEST['length'], FILTER_SANITIZE_NUMBER_INT),
         $_REQUEST['number'] === 'true',
         $_REQUEST['mark'] === 'true',

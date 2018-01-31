@@ -1,8 +1,6 @@
 <?php
 
-use Hobocta\Pwd\Generator;
-use Hobocta\Pwd\Parameters;
-use Hobocta\Pwd\Service;
+use Hobocta\Pwd;
 
 require_once 'src/autoload.php';
 ?>
@@ -22,13 +20,13 @@ require_once 'src/autoload.php';
         <?php foreach (array(8, 12, 16) as $length): ?>
             <h3><?= $length ?></h3>
 
-            <?php $service = new Service(new Generator); ?>
+            <?php $service = new Pwd\Service(new Pwd\Generator); ?>
 
             <?php foreach (
                 array(
-                    new Parameters($length, true, false, false),
-                    new Parameters($length, true, true, false),
-                    new Parameters($length, true, true, true),
+                    new Pwd\Parameters($length, true, false, false),
+                    new Pwd\Parameters($length, true, true, false),
+                    new Pwd\Parameters($length, true, true, true),
                 ) as $parameters
             ): ?>
                 <p>
@@ -57,7 +55,7 @@ require_once 'src/autoload.php';
     <?php if (file_exists($include)): ?>
         <?php
         /** @noinspection PhpIncludeInspection */
-        include($include);
+        include $include;
         ?>
     <?php endif; ?>
 </body>
