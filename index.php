@@ -26,25 +26,26 @@ require_once 'src/autoload.php';
                     array('number' => true, 'mark' => false, 'extra' => false),
                     array('number' => true, 'mark' => true, 'extra' => false),
                     array('number' => true, 'mark' => true, 'extra' => true),
-                ) as $check): ?>
+                ) as $params
+            ): ?>
                 <p>
                     <?php
                     $parameters = new Parameters;
 
                     $parameters
                         ->setLength($length)
-                        ->setNumber($check['number'])
-                        ->setMark($check['mark'])
-                        ->setExtra($check['extra']);
+                        ->setNumber($params['number'])
+                        ->setMark($params['mark'])
+                        ->setExtra($params['extra']);
 
                     $pwd = $service->generate($parameters);
                     ?>
                     <span
-                        class="pwd js-clipboard"
                         data-length="<?= $length ?>"
-                        data-number="<?= json_encode($check['number']) ?>"
-                        data-mark="<?= json_encode($check['mark']) ?>"
-                        data-extra="<?= json_encode($check['extra']) ?>"><?=$pwd ?></span>
+                        data-number="<?= json_encode($parameters->isNumber()) ?>"
+                        data-mark="<?= json_encode($parameters->isMark()) ?>"
+                        data-extra="<?= json_encode($parameters->isExtra()) ?>"
+                        class="pwd js-clipboard"><?= $pwd ?></span>
                 </p>
             <?php endforeach; ?>
         <?php endforeach; ?>
