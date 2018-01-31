@@ -60,26 +60,11 @@ class Validator
      */
     private function check($pwd)
     {
-        $has = array();
-
-        foreach (
-            array(
-                'number' => array(
-                    'is' => $this->parameters->isNumber(),
-                    'symbols' => $this->symbols->getNumber(),
-                ),
-                'mark' => array(
-                    'is' => $this->parameters->isMark(),
-                    'symbols' => $this->symbols->getMark(),
-                ),
-                'extra' => array(
-                    'is' => $this->parameters->isExtra(),
-                    'symbols' => $this->symbols->getExtra(),
-                ),
-            ) as $key => $item
-        ) {
-            $has[$key] = $item['is'] && $this->checkSymbols($pwd, $item['symbols']);
-        }
+        $has = array(
+            'number' => $this->parameters->isNumber() || $this->checkSymbols($pwd, $this->symbols->getMark()),
+            'mark' => $this->parameters->isMark() || $this->checkSymbols($pwd, $this->symbols->getMark()),
+            'extra' => $this->parameters->isExtra() || $this->checkSymbols($pwd, $this->symbols->getExtra()),
+        );
 
         return $has;
     }
