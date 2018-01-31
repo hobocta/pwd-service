@@ -32,3 +32,12 @@ h3 {
 .pwd.copied {
     color: #54ce3c;
 }
+
+html.no-clipboard .note {
+    visibility: hidden;
+}
+
+html.no-clipboard .pwd:hover {
+    color: inherit;
+    cursor: inherit;
+}

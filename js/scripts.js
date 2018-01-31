@@ -1,5 +1,15 @@
+/**
+ * @var {object} Clipboard
+ * @var {boolean} Clipboard.isSupported
+ */
+
 $(function () {
     var $html = $('html');
+
+    // noinspection JSValidateTypes
+    if (!Clipboard.isSupported()) {
+        $html.addClass('no-clipboard');
+    }
 
     /**
      * Выводит уведомление
