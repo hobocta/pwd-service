@@ -5,10 +5,10 @@ namespace Hobocta\Pwd;
 /**
  * Генератор паролей
  *
- * Class Pwd
+ * Class Generator
  * @package Hobocta\Pwd
  */
-class Pwd
+class Generator
 {
     /**
      * Создаёт и проверяет пароль
@@ -22,7 +22,7 @@ class Pwd
      *
      * @return string
      */
-    public static function get(
+    public function generate(
         $length = 12,
         array $check = array(
             'number' => true,
@@ -31,12 +31,12 @@ class Pwd
         )
     )
     {
-        $symbols = self::getSymbols($check);
+        $symbols = $this->getSymbols($check);
 
         $pwd = null;
 
-        while (self::isValid($pwd, $check, $symbols)) {
-            $pwd = self::generate($length, $symbols);
+        while ($this->isValid($pwd, $check, $symbols)) {
+            $pwd = $this->generatePwd($length, $symbols);
         }
 
         return $pwd;
@@ -49,7 +49,7 @@ class Pwd
      *
      * @return array
      */
-    private static function getSymbols(array $check)
+    private function getSymbols(array $check)
     {
         $symbols = array(
             'letter' => array_merge(range('a', 'z'), range('A', 'Z')),
@@ -58,7 +58,7 @@ class Pwd
             'extra' => array('(', ')', '[', ']', '{', '}', '?', '&', '^', '%', '*', '$', '/', '|', '`', '~'),
         );
 
-        $symbols['all'] = self::getSymbolsByParams($symbols, $check);
+        $symbols['all'] = $this->getSymbolsByParams($symbols, $check);
 
         return $symbols;
     }
@@ -72,12 +72,12 @@ class Pwd
      *
      * @return array
      */
-    private static function check($pwd, array $symbols, array $check)
+    private function check($pwd, array $symbols, array $check)
     {
         $has = array();
 
         foreach (array('number', 'mark', 'extra') as $key) {
-            $has[$key] = self::checkSymbols($pwd, $symbols, $check, $key);
+            $has[$key] = $this->checkSymbols($pwd, $symbols, $check, $key);
         }
 
         return $has;
@@ -93,7 +93,7 @@ class Pwd
      *
      * @return bool
      */
-    private static function checkSymbols($pwd, array $symbols, array $check, $key)
+    private function checkSymbols($pwd, array $symbols, array $check, $key)
     {
         $has = false;
 
@@ -118,7 +118,7 @@ class Pwd
      *
      * @return array
      */
-    private static function getSymbolsByParams(array $symbols, array $check)
+    private function getSymbolsByParams(array $symbols, array $check)
     {
         return array_merge(
             $symbols['letter'],
@@ -137,13 +137,13 @@ class Pwd
      *
      * @return bool
      */
-    private static function isValid($pwd, array $check, array $symbols)
+    private function isValid($pwd, array $check, array $symbols)
     {
         if (is_null($pwd)) {
             return true;
         }
 
-        $has = self::check($pwd, $symbols, $check);
+        $has = $this->check($pwd, $symbols, $check);
 
         return (
             ($check['number'] && (is_null($has['number']) || !$has['number']))
@@ -160,7 +160,7 @@ class Pwd
      *
      * @return string
      */
-    private static function generate($length, array $symbols)
+    private function generatePwd($length, array $symbols)
     {
         $pwd = null;
 

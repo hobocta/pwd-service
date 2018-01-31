@@ -55,7 +55,7 @@ $(function () {
         var item = $(this);
 
         $.ajax({
-            url: 'ajax-pwd-get.php',
+            url: 'ajax/get-pwd.php',
             data: {
                 length: item.data('length'),
                 number: item.data('number'),

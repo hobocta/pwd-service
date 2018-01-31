@@ -1,10 +1,8 @@
 <?php
 
-use Hobocta\Pwd\Pwd;
+use Hobocta\Pwd\Generator;
 
-if (!require_once('pwd/pwd.php')) {
-    throw new Exception('Не удалось подгрузить класс');
-}
+require_once '../src/autoload.php';
 
 if (
     empty($_REQUEST['length'])
@@ -12,10 +10,13 @@ if (
     || !isset($_REQUEST['mark'])
     || !isset($_REQUEST['extra'])
 ) {
-    throw new Exception('Пустой или неполный запрос');
+    echo 'Пустой или неполный запрос';
+    return;
 }
 
-$pwd = Pwd::get(
+$generator = new Generator;
+
+$pwd = $generator->generate(
     (int)$_REQUEST['length'],
     array(
         'number' => (bool)$_REQUEST['number'],

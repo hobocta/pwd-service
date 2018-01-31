@@ -1,10 +1,8 @@
 <?php
 
-use Hobocta\Pwd\Pwd;
+use Hobocta\Pwd\Generator;
 
-if (!require_once('pwd/pwd.php')) {
-    throw new Exception('Не удалось подгрузить класс');
-}
+require_once 'src/autoload.php';
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js no-shockwave-flash lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -24,6 +22,7 @@ if (!require_once('pwd/pwd.php')) {
         <p class="note">Кликни, чтобы скопировать пароль</p>
         <?php foreach (array(8, 12, 16) as $length): ?>
             <h3><?= $length ?></h3>
+            <?php $generator = new Generator; ?>
             <?php foreach (
                 array(
                     array('number' => true, 'mark' => false, 'extra' => false),
@@ -37,7 +36,7 @@ if (!require_once('pwd/pwd.php')) {
                         (int)$check['number'],
                         (int)$check['mark'],
                         (int)$check['extra'],
-                        Pwd::get($length, $check)
+                        $generator->generate($length, $check)
                     ) ?>
                 </p>
             <?php endforeach; ?>
