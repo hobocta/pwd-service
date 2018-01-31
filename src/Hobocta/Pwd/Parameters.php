@@ -65,7 +65,7 @@ class Parameters implements ParametersInterface
      */
     private function getMinLength()
     {
-        return 1 + (int)$this->number + (int)$this->mark + (int)$this->extra;
+        return 2 + (int)$this->number + (int)$this->mark + (int)$this->extra;
     }
 
     /**
