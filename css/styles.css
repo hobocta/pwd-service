@@ -1,5 +1,5 @@
 body {
-    font-family: 'Dejavu Sans Mono', 'Courier New', sans-serif;
+    font-family: 'Consolas', 'Courier New', sans-serif;
     position: relative;
     min-width: 360px;
     color: #8da6ce;
@@ -10,21 +10,9 @@ h3 {
     color: #f8f8b8;
 }
 
-a,
-embed {
-    outline: 0;
-}
-
 .wrap {
     width: 200px;
     margin: 2em auto 0;
-}
-
-html.lt-ie9 .note,
-html.no-js .note,
-html.no-shockwave-flash .note,
-html.js.shockwave_flash .note {
-    visibility: hidden;
 }
 
 .note {
@@ -33,24 +21,14 @@ html.js.shockwave_flash .note {
     color: #d8fa3c;
 }
 
-.pwd.hover {
+.pwd {
+    cursor: pointer;
+}
+
+.pwd:hover {
     color: #d8fa3c;
 }
 
 .pwd.copied {
     color: #54ce3c;
-}
-
-.zclip embed {
-    vertical-align: top;
-}
-
-#noty_topCenter_layout_container {
-    margin-top: 12px !important;
-}
-
-#noty_topCenter_layout_container li {
-    color: #225a17 !important;
-    border: 1px solid #369124 !important;
-    background-color: #a7e69b !important;
 }

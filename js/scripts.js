@@ -2,65 +2,65 @@ $(function () {
     var $html = $('html');
 
     /**
-     * Проверяем наличие флеша
+     * Выводит уведомление
+     *
+     * @param copiedText
+     * @returns {$}
      */
-
-    if (navigator.plugins['Shockwave Flash']) {
-        $html.removeClass('no-shockwave-flash').addClass('shockwave-flash');
-    }
-
-    /**
-     * Функция вывода уведомления
-     */
-
-    /** флаг факта открытия хотя бы одного уведомления */
-    var hasNoty = false;
-
-    $.fn.alert = function (pwd) {
+    $.fn.alert = function (copiedText) {
         var text;
 
-        pwd = $(this).text();
-
-        if (typeof pwd === 'undefined') {
+        if (typeof copiedText === 'undefined') {
             text = 'Пароль скопирован';
         } else {
-            text = 'Скопирован пароль ' + pwd;
+            text = 'Скопирован пароль ' + copiedText;
         }
 
-        // noinspection JSUnresolvedVariable
-        if (!$.browser.mozilla) {
-            noty({
-                layout: 'topCenter',
-                type: 'success',
-                text: text,
-                timeout: 1500,
-                maxVisible: 3,
-                animation: {
-                    open: {height: 'toggle'},
-                    close: {height: 'toggle'},
-                    easing: 'swing',
-                    speed: 100
-                }
-            });
-            hasNoty = true;
-        }
+        noty({
+            layout: 'topCenter',
+            type: 'success',
+            text: text,
+            timeout: 1500,
+            maxVisible: 3,
+            animation: {
+                open: {height: 'toggle'},
+                close: {height: 'toggle'},
+                easing: 'swing',
+                speed: 100
+            }
+        });
+
         return this;
     };
 
-    /**
-     * Функция получения нового пароля
-     */
+    // noinspection JSUnresolvedFunction
+    var clipboard = new Clipboard('.js-clipboard', {
+        text: function (trigger) {
+            var $trigger = $(trigger);
+
+            return $trigger.text();
+        }
+    });
+
+    clipboard.on('success', function (event) {
+        var $item = $(event.trigger);
+
+        $item
+            .addClass('copied')
+            .alert(event.text)
+            .getPwd();
+    });
 
     $.fn.getPwd = function () {
-        var item = $(this);
+        var $item = $(this);
 
         $.ajax({
             url: 'ajax/get-pwd.php',
             data: {
-                length: item.data('length'),
-                number: item.data('number'),
-                mark: item.data('mark'),
-                extra: item.data('extra')
+                length: $item.data('length'),
+                number: $item.data('number'),
+                mark: $item.data('mark'),
+                extra: $item.data('extra')
             },
             dataType: 'json',
             /**
@@ -70,11 +70,8 @@ $(function () {
             success: function (data) {
                 if (!data.error && data.pwd) {
                     setTimeout(function () {
-                        item.removeClass('copied');
-                        item.siblings('.zclip').remove();
-                        item.text(data.pwd);
-                        item.unbind('zClip_copy zClip_beforeCopy zClip_afterCopy');
-                        item.zClipRun();
+                        $item.removeClass('copied');
+                        $item.text(data.pwd);
                     }, 1700);
                 } else {
                     alert('Error');
@@ -84,40 +81,4 @@ $(function () {
 
         return this;
     };
-
-    /**
-     * zClip run
-     */
-
-    $.fn.zClipRun = function () {
-        var $item = $(this);
-
-        $item.zclip({
-            path: 'js/vendor/jquery.zclip.1.1.1/ZeroClipboard.swf',
-            copy: function () {
-                return $item.text();
-            },
-            afterCopy: function () {
-                $item
-                    .addClass('copied')
-                    .alert()
-                    .getPwd();
-            }
-        });
-    };
-
-    /**
-     * Если это не старые IE и включен флеш, то вешаем обработку копирования в буфер
-     * и уведомление об этом
-     */
-    if (
-        !$html.hasClass('lt-ie9') &&
-        navigator.plugins['Shockwave Flash']
-    ) {
-        var $pwds = $('.pwd');
-
-        $pwds.each(function (index, item) {
-            $(item).zClipRun();
-        });
-    }
 });
