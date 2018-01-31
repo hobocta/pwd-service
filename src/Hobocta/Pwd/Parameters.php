@@ -14,64 +14,39 @@ class Parameters implements ParametersInterface
      * Длина пароля
      * @var int
      */
-    private $length = 12;
+    private $length;
 
     /**
      * В пароле обязательно должна быть цифра
      * @var bool
      */
-    private $number = true;
+    private $number;
 
     /**
      * В пароле обязательно должен быть знак препинания
      * @var bool
      */
-    private $mark = true;
+    private $mark;
 
     /**
      * В пароле обязательно должен быть страшный знак препинания
      * @var bool
      */
-    private $extra = false;
+    private $extra;
 
     /**
+     * Parameters constructor.
      * @param int $length
-     * @return Parameters
+     * @param bool $number
+     * @param bool $mark
+     * @param bool $extra
      */
-    public function setLength($length)
+    public function __construct($length = 12, $number = true, $mark = true, $extra = false)
     {
         $this->length = (int)$length;
-        return $this;
-    }
-
-    /**
-     * @param bool $number
-     * @return Parameters
-     */
-    public function setNumber($number)
-    {
         $this->number = (bool)$number;
-        return $this;
-    }
-
-    /**
-     * @param bool $mark
-     * @return Parameters
-     */
-    public function setMark($mark)
-    {
         $this->mark = (bool)$mark;
-        return $this;
-    }
-
-    /**
-     * @param bool $extra
-     * @return Parameters
-     */
-    public function setExtra($extra)
-    {
         $this->extra = (bool)$extra;
-        return $this;
     }
 
     /**

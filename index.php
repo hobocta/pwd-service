@@ -1,8 +1,8 @@
 <?php
 
-use Hobocta\Pwd\Service;
 use Hobocta\Pwd\Generator;
 use Hobocta\Pwd\Parameters;
+use Hobocta\Pwd\Service;
 
 require_once 'src/autoload.php';
 ?>
@@ -18,28 +18,22 @@ require_once 'src/autoload.php';
 <body>
     <div class="wrap">
         <p class="note">Кликни, чтобы скопировать</p>
+
         <?php foreach (array(8, 12, 16) as $length): ?>
             <h3><?= $length ?></h3>
+
             <?php $service = new Service(new Generator); ?>
+
             <?php foreach (
                 array(
-                    array('number' => true, 'mark' => false, 'extra' => false),
-                    array('number' => true, 'mark' => true, 'extra' => false),
-                    array('number' => true, 'mark' => true, 'extra' => true),
-                ) as $params
+                    new Parameters($length, true, false, false),
+                    new Parameters($length, true, true, false),
+                    new Parameters($length, true, true, true),
+                ) as $parameters
             ): ?>
                 <p>
-                    <?php
-                    $parameters = new Parameters;
+                    <?php $pwd = $service->generate($parameters); ?>
 
-                    $parameters
-                        ->setLength($length)
-                        ->setNumber($params['number'])
-                        ->setMark($params['mark'])
-                        ->setExtra($params['extra']);
-
-                    $pwd = $service->generate($parameters);
-                    ?>
                     <span
                         data-length="<?= $length ?>"
                         data-number="<?= json_encode($parameters->isNumber()) ?>"
@@ -50,6 +44,7 @@ require_once 'src/autoload.php';
             <?php endforeach; ?>
         <?php endforeach; ?>
     </div>
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write("<script src='js/vendor/jquery.1.10.1.min.js'><\/script>")</script>
     <script src="js/vendor/modernizr.2.7.1.min.js"></script>
@@ -57,6 +52,7 @@ require_once 'src/autoload.php';
     <script src="js/vendor/jquery.noty.packaged.min.js"></script>
     <script src="js/vendor/clipboard.min.js"></script>
     <script src="js/scripts.js"></script>
+
     <?php $include = 'more/include.php'; ?>
     <?php if (file_exists($include)): ?>
         <?php

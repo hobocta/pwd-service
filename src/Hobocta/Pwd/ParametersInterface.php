@@ -8,14 +8,6 @@ namespace Hobocta\Pwd;
  */
 interface ParametersInterface
 {
-    public function setLength($length);
-
-    public function setNumber($number);
-
-    public function setMark($mark);
-
-    public function setExtra($extra);
-
     public function getLength();
 
     public function isNumber();
