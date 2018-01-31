@@ -3,7 +3,7 @@
 namespace Hobocta\Pwd;
 
 /**
- * Валидатор пароля
+ * Валидатор сгенерированного пароля
  *
  * Class Validator
  * @package Hobocta\Pwd

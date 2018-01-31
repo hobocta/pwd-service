@@ -3,6 +3,8 @@
 namespace Hobocta\Pwd;
 
 /**
+ * Класс описывающий наборы символов для генерации пароля
+ *
  * Class Symbols
  * @package Hobocta\Pwd
  */
