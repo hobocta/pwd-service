@@ -56,6 +56,14 @@ class Parameters implements ParametersInterface
                 sprintf('Unable to set length=%s, minLength=%s', $this->length, $minLength)
             );
         }
+
+        $maxLength = $this->getMaxLength();
+
+        if ($this->length > $maxLength) {
+            throw new ParametersException(
+                sprintf('Unable to set length=%s, maxLength=%s', $this->length, $maxLength)
+            );
+        }
     }
 
     /**
@@ -66,6 +74,16 @@ class Parameters implements ParametersInterface
     private function getMinLength()
     {
         return 2 + (int)$this->number + (int)$this->mark + (int)$this->extra;
+    }
+
+    /**
+     * Определяет максимальную длину пароля
+     *
+     * @return int
+     */
+    private function getMaxLength()
+    {
+        return 1024;
     }
 
     /**
