@@ -37,16 +37,16 @@ class Service
      */
     public function generate(ParametersInterface $parameters)
     {
-        $symbols = new SymbolsManager($parameters);
+        $symbolsManager = new SymbolsManager($parameters);
 
-        $symbolSet = $symbols->getSymbols();
+        $symbols = $symbolsManager->getSymbols();
 
-        $this->validator = new Validator($parameters, $symbolSet);
+        $this->validator = new Validator($parameters, $symbols);
 
         $pwd = null;
 
-        while ($this->validator->validate($pwd)) {
-            $pwd = $this->generator->generate($parameters->getLength(), $symbolSet);
+        while ($this->validator->isNotValid($pwd)) {
+            $pwd = $this->generator->generate($parameters->getLength(), $symbols);
         }
 
         return $pwd;

@@ -8,5 +8,5 @@ namespace Hobocta\Pwd;
  */
 interface GeneratorInterface
 {
-    public function generate($length, array $symbols);
+    public function generate($length, SymbolsInterface $symbols);
 }

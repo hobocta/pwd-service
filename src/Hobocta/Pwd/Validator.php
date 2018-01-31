@@ -16,19 +16,19 @@ class Validator
     private $parameters;
 
     /**
-     * @var array
+     * @var SymbolsInterface
      */
-    private $symbolSet;
+    private $symbols;
 
     /**
      * Validator constructor.
      * @param ParametersInterface $parameters
-     * @param array $symbolSet
+     * @param SymbolsInterface $symbols
      */
-    public function __construct(ParametersInterface $parameters, array $symbolSet)
+    public function __construct(ParametersInterface $parameters, SymbolsInterface $symbols)
     {
         $this->parameters = $parameters;
-        $this->symbolSet = $symbolSet;
+        $this->symbols = $symbols;
     }
 
     /**
@@ -37,7 +37,7 @@ class Validator
      * @param string $pwd
      * @return bool
      */
-    public function validate($pwd)
+    public function isNotValid($pwd)
     {
         if (is_null($pwd)) {
             return true;
@@ -46,9 +46,9 @@ class Validator
         $has = $this->check($pwd);
 
         return (
-            ($this->parameters->isNumber() && (is_null($has['number']) || !$has['number']))
-            || ($this->parameters->isMark() && (is_null($has['mark']) || !$has['mark']))
-            || ($this->parameters->isExtra() && (is_null($has['extra']) || !$has['extra']))
+            ($this->parameters->isNumber() && !$has['number'])
+            || ($this->parameters->isMark() && !$has['mark'])
+            || ($this->parameters->isExtra() && !$has['extra'])
         );
     }
 
@@ -62,8 +62,23 @@ class Validator
     {
         $has = array();
 
-        foreach (array('number', 'mark', 'extra') as $key) {
-            $has[$key] = $this->checkSymbols($pwd, $key);
+        foreach (
+            array(
+                'number' => array(
+                    'is' => $this->parameters->isNumber(),
+                    'symbols' => $this->symbols->getNumber(),
+                ),
+                'mark' => array(
+                    'is' => $this->parameters->isMark(),
+                    'symbols' => $this->symbols->getMark(),
+                ),
+                'extra' => array(
+                    'is' => $this->parameters->isExtra(),
+                    'symbols' => $this->symbols->getExtra(),
+                ),
+            ) as $key => $item
+        ) {
+            $has[$key] = $item['is'] && $this->checkSymbols($pwd, $item['symbols']);
         }
 
         return $has;
@@ -73,21 +88,18 @@ class Validator
      * Проверяет наличие в пароле символа из указанного набора
      *
      * @param string $pwd
-     * @param $key
-     *
+     * @param array $symbols
      * @return bool
      */
-    private function checkSymbols($pwd, $key)
+    private function checkSymbols($pwd, array $symbols)
     {
         $has = false;
 
-        if (call_user_func(array($this->parameters, sprintf('is%s', ucfirst($key))))) {
-            foreach ($this->symbolSet[$key] as $char) {
-                if (strpos($pwd, (string)$char) !== false) {
-                    $has = true;
+        foreach ($symbols as $char) {
+            if (strpos($pwd, $char) !== false) {
+                $has = true;
 
-                    break;
-                }
+                break;
             }
         }
 

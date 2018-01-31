@@ -27,35 +27,21 @@ class SymbolsManager
     /**
      * Возвращает список массивов символов
      *
-     * @return array
+     * @return SymbolsInterface
      */
     public function getSymbols()
     {
-        $symbols = array(
-            'letter' => array_merge(range('a', 'z'), range('A', 'Z')),
-            'number' => range(0, 9),
-            'mark' => array('.', ',', '+', '-', '_', '!', '@'),
-            'extra' => array('(', ')', '[', ']', '{', '}', '?', '&', '^', '%', '*', '$', '/', '|', '`', '~'),
-        );
+        $symbols = new Symbols;
 
-        $symbols['all'] = $this->getSymbolsByParams($symbols);
+        $symbols->setAll(
+            array_merge(
+                $symbols->getLetter(),
+                $this->parameters->isNumber() ? $symbols->getNumber() : array(),
+                $this->parameters->isMark() ? $symbols->getMark() : array(),
+                $this->parameters->isExtra() ? $symbols->getExtra() : array()
+            )
+        );
 
         return $symbols;
-    }
-
-    /**
-     * Возвращает массив всех символов по заданным критериям
-     *
-     * @param array $symbols
-     * @return array
-     */
-    private function getSymbolsByParams(array $symbols)
-    {
-        return array_merge(
-            $symbols['letter'],
-            $this->parameters->isNumber() ? $symbols['number'] : array(),
-            $this->parameters->isMark() ? $symbols['mark'] : array(),
-            $this->parameters->isExtra() ? $symbols['extra'] : array()
-        );
     }
 }

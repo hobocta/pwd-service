@@ -14,22 +14,24 @@ class Generator implements GeneratorInterface
      * Генерирует пароль
      *
      * @param int $length
-     * @param array $symbols
+     * @param SymbolsInterface $symbols
      * @return string
      */
-    public function generate($length, array $symbols)
+    public function generate($length, SymbolsInterface $symbols)
     {
         $pwd = null;
 
-        $countAll = count($symbols['all']) - 1;
+        $all = $symbols->getAll();
+        $letter = $symbols->getLetter();
 
-        $countS = count($symbols['letter']) - 1;
+        $countAll = count($all) - 1;
+        $count = count($letter) - 1;
 
         for ($i = 0; $i < $length; $i++) {
             if ($i == 0 || $i == $length - 1) {
-                $pwd .= $symbols['letter'][rand(0, $countS)];
+                $pwd .= $letter[rand(0, $count)];
             } else {
-                $pwd .= $symbols['all'][rand(0, $countAll)];
+                $pwd .= $all[rand(0, $countAll)];
             }
         }
 
