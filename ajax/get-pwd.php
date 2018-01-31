@@ -6,6 +6,8 @@ use Hobocta\Pwd\Service;
 
 require_once '../src/autoload.php';
 
+header('Content-Type: application/json');
+
 $result = array(
     'error' => false,
     'pwd' => '',
