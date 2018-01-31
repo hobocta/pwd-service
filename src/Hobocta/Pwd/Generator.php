@@ -11,6 +11,11 @@ namespace Hobocta\Pwd;
 class Generator
 {
     /**
+     * @var Parameters
+     */
+    private $parameters;
+
+    /**
      * Создаёт и проверяет пароль
      *
      * @param Parameters $parameters
@@ -18,12 +23,15 @@ class Generator
      */
     public function generate(Parameters $parameters)
     {
-        $symbols = $this->getSymbols($parameters);
+        $this->parameters = $parameters;
+        unset($parameters);
+
+        $symbols = $this->getSymbols();
 
         $pwd = null;
 
-        while ($this->isValid($pwd, $parameters, $symbols)) {
-            $pwd = $this->generatePwd($parameters->getLength(), $symbols);
+        while ($this->isValid($pwd, $symbols)) {
+            $pwd = $this->generatePwd($this->parameters->getLength(), $symbols);
         }
 
         return $pwd;
@@ -32,10 +40,9 @@ class Generator
     /**
      * Возвращает список массивов символов
      *
-     * @param Parameters $parameters
      * @return array
      */
-    private function getSymbols(Parameters $parameters)
+    private function getSymbols()
     {
         $symbols = array(
             'letter' => array_merge(range('a', 'z'), range('A', 'Z')),
@@ -44,7 +51,7 @@ class Generator
             'extra' => array('(', ')', '[', ']', '{', '}', '?', '&', '^', '%', '*', '$', '/', '|', '`', '~'),
         );
 
-        $symbols['all'] = $this->getSymbolsByParams($symbols, $parameters);
+        $symbols['all'] = $this->getSymbolsByParams($symbols);
 
         return $symbols;
     }
@@ -54,15 +61,14 @@ class Generator
      *
      * @param string $pwd
      * @param array $symbols
-     * @param Parameters $parameters
      * @return array
      */
-    private function check($pwd, array $symbols, Parameters $parameters)
+    private function check($pwd, array $symbols)
     {
         $has = array();
 
         foreach (array('number', 'mark', 'extra') as $key) {
-            $has[$key] = $this->checkSymbols($pwd, $symbols, $parameters, $key);
+            $has[$key] = $this->checkSymbols($pwd, $symbols, $key);
         }
 
         return $has;
@@ -73,16 +79,15 @@ class Generator
      *
      * @param string $pwd
      * @param array $symbols
-     * @param Parameters $parameters
      * @param $key
      *
      * @return bool
      */
-    private function checkSymbols($pwd, array $symbols, Parameters $parameters, $key)
+    private function checkSymbols($pwd, array $symbols, $key)
     {
         $has = false;
 
-        if (call_user_func(array($parameters, sprintf('is%s', ucfirst($key))))) {
+        if (call_user_func(array($this->parameters, sprintf('is%s', ucfirst($key))))) {
             foreach ($symbols[$key] as $char) {
                 if (strpos($pwd, (string)$char) !== false) {
                     $has = true;
@@ -99,16 +104,15 @@ class Generator
      * Возвращает массив всех символов по заданным критериям
      *
      * @param array $symbols
-     * @param Parameters $parameters
      * @return array
      */
-    private function getSymbolsByParams(array $symbols, Parameters $parameters)
+    private function getSymbolsByParams(array $symbols)
     {
         return array_merge(
             $symbols['letter'],
-            $parameters->isNumber() ? $symbols['number'] : array(),
-            $parameters->isMark() ? $symbols['mark'] : array(),
-            $parameters->isExtra() ? $symbols['extra'] : array()
+            $this->parameters->isNumber() ? $symbols['number'] : array(),
+            $this->parameters->isMark() ? $symbols['mark'] : array(),
+            $this->parameters->isExtra() ? $symbols['extra'] : array()
         );
     }
 
@@ -116,22 +120,21 @@ class Generator
      * Проверяет пароль
      *
      * @param string $pwd
-     * @param Parameters $parameters
      * @param array $symbols
      * @return bool
      */
-    private function isValid($pwd, Parameters $parameters, array $symbols)
+    private function isValid($pwd, array $symbols)
     {
         if (is_null($pwd)) {
             return true;
         }
 
-        $has = $this->check($pwd, $symbols, $parameters);
+        $has = $this->check($pwd, $symbols);
 
         return (
-            ($parameters->isNumber() && (is_null($has['number']) || !$has['number']))
-            || ($parameters->isMark() && (is_null($has['mark']) || !$has['mark']))
-            || ($parameters->isExtra() && (is_null($has['extra']) || !$has['extra']))
+            ($this->parameters->isNumber() && (is_null($has['number']) || !$has['number']))
+            || ($this->parameters->isMark() && (is_null($has['mark']) || !$has['mark']))
+            || ($this->parameters->isExtra() && (is_null($has['extra']) || !$has['extra']))
         );
     }
 
