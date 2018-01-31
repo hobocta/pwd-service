@@ -40,6 +40,7 @@ class Parameters implements ParametersInterface
      * @param bool $number
      * @param bool $mark
      * @param bool $extra
+     * @throws \Exception
      */
     public function __construct($length = 12, $number = true, $mark = true, $extra = false)
     {
@@ -47,6 +48,24 @@ class Parameters implements ParametersInterface
         $this->number = (bool)$number;
         $this->mark = (bool)$mark;
         $this->extra = (bool)$extra;
+
+        $minLength = $this->getMinLength();
+
+        if ($this->length < $minLength) {
+            throw new ParametersException(
+                sprintf('Unable to set length=%s, minLength=%s', $this->length, $minLength)
+            );
+        }
+    }
+
+    /**
+     * Определяет минимальную длину пароля
+     *
+     * @return int
+     */
+    private function getMinLength()
+    {
+        return 1 + (int)$this->number + (int)$this->mark + (int)$this->extra;
     }
 
     /**
