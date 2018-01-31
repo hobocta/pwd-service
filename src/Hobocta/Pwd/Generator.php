@@ -8,7 +8,7 @@ namespace Hobocta\Pwd;
  * Class Generator
  * @package Hobocta\Pwd
  */
-class Generator
+class Generator implements GeneratorInterface
 {
     /**
      * Генерирует пароль

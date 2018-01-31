@@ -11,7 +11,7 @@ namespace Hobocta\Pwd;
 class Service
 {
     /**
-     * @var Generator
+     * @var GeneratorInterface
      */
     private $generator;
 
@@ -22,10 +22,9 @@ class Service
 
     /**
      * Service constructor.
-     * @param Generator $generator
-     * @param Validator $validator
+     * @param GeneratorInterface $generator
      */
-    public function __construct(Generator $generator)
+    public function __construct(GeneratorInterface $generator)
     {
         $this->generator = $generator;
     }
@@ -33,10 +32,10 @@ class Service
     /**
      * Создаёт и проверяет пароль
      *
-     * @param Parameters $parameters
+     * @param ParametersInterface $parameters
      * @return null
      */
-    public function generate(Parameters $parameters)
+    public function generate(ParametersInterface $parameters)
     {
         $symbols = new Symbols($parameters);
 

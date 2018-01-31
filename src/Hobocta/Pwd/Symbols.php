@@ -2,19 +2,24 @@
 
 namespace Hobocta\Pwd;
 
-
+/**
+ * Класс для управления символами пароля
+ *
+ * Class Symbols
+ * @package Hobocta\Pwd
+ */
 class Symbols
 {
     /**
-     * @var Parameters
+     * @var ParametersInterface
      */
     private $parameters;
 
     /**
      * Symbols constructor.
-     * @param Parameters $parameters
+     * @param ParametersInterface $parameters
      */
-    public function __construct(Parameters $parameters)
+    public function __construct(ParametersInterface $parameters)
     {
         $this->parameters = $parameters;
     }

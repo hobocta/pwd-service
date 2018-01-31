@@ -8,7 +8,7 @@ namespace Hobocta\Pwd;
  * Class Parameters
  * @package Hobocta\Pwd
  */
-class Parameters
+class Parameters implements ParametersInterface
 {
     /**
      * Длина пароля

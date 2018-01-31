@@ -3,13 +3,15 @@
 namespace Hobocta\Pwd;
 
 /**
+ * Валидатор пароля
+ *
  * Class Validator
  * @package Hobocta\Pwd
  */
 class Validator
 {
     /**
-     * @var Parameters
+     * @var ParametersInterface
      */
     private $parameters;
 
@@ -20,10 +22,10 @@ class Validator
 
     /**
      * Validator constructor.
-     * @param Parameters $parameters
+     * @param ParametersInterface $parameters
      * @param array $symbolSet
      */
-    public function __construct(Parameters $parameters, array $symbolSet)
+    public function __construct(ParametersInterface $parameters, array $symbolSet)
     {
         $this->parameters = $parameters;
         $this->symbolSet = $symbolSet;
