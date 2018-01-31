@@ -2,7 +2,6 @@
  * @var {object} Clipboard
  * @var {boolean} Clipboard.isSupported
  */
-
 $(function () {
     var $html = $('html');
 
@@ -10,6 +9,24 @@ $(function () {
     if (!Clipboard.isSupported()) {
         $html.addClass('no-clipboard');
     }
+
+    // noinspection JSUnresolvedFunction
+    var clipboard = new Clipboard('.js-clipboard', {
+        text: function (trigger) {
+            var $trigger = $(trigger);
+
+            return $trigger.text();
+        }
+    });
+
+    clipboard.on('success', function (event) {
+        var $item = $(event.trigger);
+
+        $item
+            .addClass('copied')
+            .alert(event.text)
+            .getPwd();
+    });
 
     /**
      * Выводит уведомление
@@ -43,24 +60,11 @@ $(function () {
         return this;
     };
 
-    // noinspection JSUnresolvedFunction
-    var clipboard = new Clipboard('.js-clipboard', {
-        text: function (trigger) {
-            var $trigger = $(trigger);
-
-            return $trigger.text();
-        }
-    });
-
-    clipboard.on('success', function (event) {
-        var $item = $(event.trigger);
-
-        $item
-            .addClass('copied')
-            .alert(event.text)
-            .getPwd();
-    });
-
+    /**
+     * Получает новый пароль
+     *
+     * @returns {$}
+     */
     $.fn.getPwd = function () {
         var $item = $(this);
 
