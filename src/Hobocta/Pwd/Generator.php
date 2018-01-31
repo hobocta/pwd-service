@@ -29,9 +29,9 @@ class Generator implements GeneratorInterface
 
         for ($i = 0; $i < $length; $i++) {
             if ($i == 0 || $i == $length - 1) {
-                $pwd .= $letter[rand(0, $count)];
+                $pwd .= $letter[mt_rand(0, $count)];
             } else {
-                $pwd .= $all[rand(0, $countAll)];
+                $pwd .= $all[mt_rand(0, $countAll)];
             }
         }
 
