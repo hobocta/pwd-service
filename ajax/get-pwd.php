@@ -1,5 +1,6 @@
 <?php
 
+use Hobocta\Pwd\Service;
 use Hobocta\Pwd\Generator;
 use Hobocta\Pwd\Parameters;
 
@@ -18,7 +19,7 @@ if (
 ) {
     $result['error'] = true;
 } else {
-    $generator = new Generator;
+    $service = new Service(new Generator);
 
     $parameters = new Parameters;
     $parameters
@@ -27,7 +28,7 @@ if (
         ->setMark($_REQUEST['mark'] === 'true')
         ->setExtra($_REQUEST['extra'] === 'true');
 
-    $result['pwd'] = $generator->generate($parameters);
+    $result['pwd'] = $service->generate($parameters);
 }
 
 echo json_encode($result);

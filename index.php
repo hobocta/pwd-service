@@ -1,5 +1,6 @@
 <?php
 
+use Hobocta\Pwd\Service;
 use Hobocta\Pwd\Generator;
 use Hobocta\Pwd\Parameters;
 
@@ -19,7 +20,7 @@ require_once 'src/autoload.php';
         <p class="note">Кликни, чтобы скопировать</p>
         <?php foreach (array(8, 12, 16) as $length): ?>
             <h3><?= $length ?></h3>
-            <?php $generator = new Generator; ?>
+            <?php $service = new Service(new Generator); ?>
             <?php foreach (
                 array(
                     array('number' => true, 'mark' => false, 'extra' => false),
@@ -36,7 +37,7 @@ require_once 'src/autoload.php';
                         ->setMark($check['mark'])
                         ->setExtra($check['extra']);
 
-                    $pwd = $generator->generate($parameters);
+                    $pwd = $service->generate($parameters);
                     ?>
                     <span
                         class="pwd js-clipboard"
