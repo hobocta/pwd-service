@@ -1,56 +1,56 @@
 body {
-	font-family: 'Dejavu Sans Mono', 'Courier New', sans-serif;
-	position: relative;
-	min-width: 360px;
-	color: #8da6ce;
-	background-color: #0c1021;
+    font-family: 'Dejavu Sans Mono', 'Courier New', sans-serif;
+    position: relative;
+    min-width: 360px;
+    color: #8da6ce;
+    background-color: #0c1021;
 }
 
 h3 {
-	color: #f8f8b8;
+    color: #f8f8b8;
 }
 
 a,
 embed {
-	outline: 0;
+    outline: 0;
 }
 
 .wrap {
-	width: 200px;
-	margin: 2em auto 0;
+    width: 200px;
+    margin: 2em auto 0;
 }
 
 html.lt-ie9 .note,
 html.no-js .note,
 html.no-shockwave-flash .note,
 html.js.shockwave_flash .note {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .note {
-	font-size: 90%;
-	padding: 0 0 .5em 0;
-	color: #d8fa3c;
+    font-size: 90%;
+    padding: 0 0 .5em 0;
+    color: #d8fa3c;
 }
 
 .pwd.hover {
-	color: #d8fa3c;
+    color: #d8fa3c;
 }
 
 .pwd.copied {
-	color: #54ce3c;
+    color: #54ce3c;
 }
 
 .zclip embed {
-	vertical-align: top;
+    vertical-align: top;
 }
 
 #noty_topCenter_layout_container {
-	margin-top: 12px !important;
+    margin-top: 12px !important;
 }
 
 #noty_topCenter_layout_container li {
-	color: #225a17 !important;
-	border: 1px solid #369124 !important;
-	background-color: #a7e69b !important;
+    color: #225a17 !important;
+    border: 1px solid #369124 !important;
+    background-color: #a7e69b !important;
 }
