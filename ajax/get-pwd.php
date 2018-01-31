@@ -1,6 +1,7 @@
 <?php
 
 use Hobocta\Pwd\Generator;
+use Hobocta\Pwd\Parameters;
 
 require_once '../src/autoload.php';
 
@@ -11,22 +12,22 @@ $result = array(
 
 if (
     empty($_REQUEST['length'])
-    || !isset($_REQUEST['number'])
-    || !isset($_REQUEST['mark'])
-    || !isset($_REQUEST['extra'])
+    || empty($_REQUEST['number'])
+    || empty($_REQUEST['mark'])
+    || empty($_REQUEST['extra'])
 ) {
     $result['error'] = true;
 } else {
     $generator = new Generator;
 
-    $result['pwd'] = $generator->generate(
-        (int)$_REQUEST['length'],
-        array(
-            'number' => (bool)$_REQUEST['number'],
-            'mark' => (bool)$_REQUEST['mark'],
-            'extra' => (bool)$_REQUEST['extra'],
-        )
-    );
+    $parameters = new Parameters;
+    $parameters
+        ->setLength(filter_var($_REQUEST['length'], FILTER_SANITIZE_NUMBER_INT))
+        ->setNumber($_REQUEST['number'] === 'true')
+        ->setMark($_REQUEST['mark'] === 'true')
+        ->setExtra($_REQUEST['extra'] === 'true');
+
+    $result['pwd'] = $generator->generate($parameters);
 }
 
 echo json_encode($result);

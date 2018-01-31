@@ -1,6 +1,7 @@
 <?php
 
 use Hobocta\Pwd\Generator;
+use Hobocta\Pwd\Parameters;
 
 require_once 'src/autoload.php';
 ?>
@@ -26,13 +27,23 @@ require_once 'src/autoload.php';
                     array('number' => true, 'mark' => true, 'extra' => true),
                 ) as $check): ?>
                 <p>
-                    <?php $pwd = $generator->generate($length, $check); ?>
+                    <?php
+                    $parameters = new Parameters;
+
+                    $parameters
+                        ->setLength($length)
+                        ->setNumber($check['number'])
+                        ->setMark($check['mark'])
+                        ->setExtra($check['extra']);
+
+                    $pwd = $generator->generate($parameters);
+                    ?>
                     <span
                         class="pwd js-clipboard"
                         data-length="<?= $length ?>"
-                        data-number="<?= (int)$check['number'] ?>"
-                        data-mark="<?= (int)$check['mark'] ?>"
-                        data-extra="<?= (int)$check['extra'] ?>"><?=$pwd ?></span>
+                        data-number="<?= json_encode($check['number']) ?>"
+                        data-mark="<?= json_encode($check['mark']) ?>"
+                        data-extra="<?= json_encode($check['extra']) ?>"><?=$pwd ?></span>
                 </p>
             <?php endforeach; ?>
         <?php endforeach; ?>

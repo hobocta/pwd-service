@@ -13,30 +13,17 @@ class Generator
     /**
      * Создаёт и проверяет пароль
      *
-     * Если $check['number'] == true, то в пароле обязательно будет цифра
-     * Если $check['mark'] == true, то в пароле обязательно будет знак препинания
-     * Если $check['extra'] == true, то в пароле обязательно будет страшный знак препинания
-     *
-     * @param int $length - длина пароля
-     * @param array $check
-     *
+     * @param Parameters $parameters
      * @return string
      */
-    public function generate(
-        $length = 12,
-        array $check = array(
-            'number' => true,
-            'mark' => true,
-            'extra' => false,
-        )
-    )
+    public function generate(Parameters $parameters)
     {
-        $symbols = $this->getSymbols($check);
+        $symbols = $this->getSymbols($parameters);
 
         $pwd = null;
 
-        while ($this->isValid($pwd, $check, $symbols)) {
-            $pwd = $this->generatePwd($length, $symbols);
+        while ($this->isValid($pwd, $parameters, $symbols)) {
+            $pwd = $this->generatePwd($parameters->getLength(), $symbols);
         }
 
         return $pwd;
@@ -45,11 +32,10 @@ class Generator
     /**
      * Возвращает список массивов символов
      *
-     * @param array $check
-     *
+     * @param Parameters $parameters
      * @return array
      */
-    private function getSymbols(array $check)
+    private function getSymbols(Parameters $parameters)
     {
         $symbols = array(
             'letter' => array_merge(range('a', 'z'), range('A', 'Z')),
@@ -58,7 +44,7 @@ class Generator
             'extra' => array('(', ')', '[', ']', '{', '}', '?', '&', '^', '%', '*', '$', '/', '|', '`', '~'),
         );
 
-        $symbols['all'] = $this->getSymbolsByParams($symbols, $check);
+        $symbols['all'] = $this->getSymbolsByParams($symbols, $parameters);
 
         return $symbols;
     }
@@ -66,18 +52,17 @@ class Generator
     /**
      * Проверяет наличие выбранных наборов символов
      *
-     * @param $pwd
-     * @param $symbols
-     * @param $check
-     *
+     * @param string $pwd
+     * @param array $symbols
+     * @param Parameters $parameters
      * @return array
      */
-    private function check($pwd, array $symbols, array $check)
+    private function check($pwd, array $symbols, Parameters $parameters)
     {
         $has = array();
 
         foreach (array('number', 'mark', 'extra') as $key) {
-            $has[$key] = $this->checkSymbols($pwd, $symbols, $check, $key);
+            $has[$key] = $this->checkSymbols($pwd, $symbols, $parameters, $key);
         }
 
         return $has;
@@ -86,18 +71,18 @@ class Generator
     /**
      * Проверяет наличие в пароле символа из указанного набора
      *
-     * @param $pwd
+     * @param string $pwd
      * @param array $symbols
-     * @param array $check
+     * @param Parameters $parameters
      * @param $key
      *
      * @return bool
      */
-    private function checkSymbols($pwd, array $symbols, array $check, $key)
+    private function checkSymbols($pwd, array $symbols, Parameters $parameters, $key)
     {
         $has = false;
 
-        if ($check[$key]) {
+        if (call_user_func(array($parameters, sprintf('is%s', ucfirst($key))))) {
             foreach ($symbols[$key] as $char) {
                 if (strpos($pwd, (string)$char) !== false) {
                     $has = true;
@@ -114,17 +99,16 @@ class Generator
      * Возвращает массив всех символов по заданным критериям
      *
      * @param array $symbols
-     * @param array $check
-     *
+     * @param Parameters $parameters
      * @return array
      */
-    private function getSymbolsByParams(array $symbols, array $check)
+    private function getSymbolsByParams(array $symbols, Parameters $parameters)
     {
         return array_merge(
             $symbols['letter'],
-            $check['number'] ? $symbols['number'] : array(),
-            $check['mark'] ? $symbols['mark'] : array(),
-            $check['extra'] ? $symbols['extra'] : array()
+            $parameters->isNumber() ? $symbols['number'] : array(),
+            $parameters->isMark() ? $symbols['mark'] : array(),
+            $parameters->isExtra() ? $symbols['extra'] : array()
         );
     }
 
@@ -132,23 +116,22 @@ class Generator
      * Проверяет пароль
      *
      * @param string $pwd
-     * @param array $check
+     * @param Parameters $parameters
      * @param array $symbols
-     *
      * @return bool
      */
-    private function isValid($pwd, array $check, array $symbols)
+    private function isValid($pwd, Parameters $parameters, array $symbols)
     {
         if (is_null($pwd)) {
             return true;
         }
 
-        $has = $this->check($pwd, $symbols, $check);
+        $has = $this->check($pwd, $symbols, $parameters);
 
         return (
-            ($check['number'] && (is_null($has['number']) || !$has['number']))
-            || ($check['mark'] && (is_null($has['mark']) || !$has['mark']))
-            || ($check['extra'] && (is_null($has['extra']) || !$has['extra']))
+            ($parameters->isNumber() && (is_null($has['number']) || !$has['number']))
+            || ($parameters->isMark() && (is_null($has['mark']) || !$has['mark']))
+            || ($parameters->isExtra() && (is_null($has['extra']) || !$has['extra']))
         );
     }
 
