@@ -17,7 +17,7 @@ require_once 'src/autoload.php';
     <div class="wrap">
         <p class="note">Кликни, чтобы скопировать</p>
 
-        <?php foreach (array(8, 12, 16) as $length): ?>
+        <?php foreach (array(12, 14, 16) as $length): ?>
             <h3><?= $length ?></h3>
 
             <?php $service = new Pwd\Service(new Pwd\Generator); ?>
