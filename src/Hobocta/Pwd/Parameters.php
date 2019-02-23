@@ -40,7 +40,7 @@ class Parameters implements ParametersInterface
      * @param bool $number
      * @param bool $mark
      * @param bool $extra
-     * @throws \Exception
+     * @throws ParametersException
      */
     public function __construct($length = 12, $number = true, $mark = true, $extra = false)
     {

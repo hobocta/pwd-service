@@ -22,24 +22,28 @@ require_once 'src/autoload.php';
 
             <?php $service = new Pwd\Service(new Pwd\Generator); ?>
 
-            <?php foreach (
-                array(
-                    new Pwd\Parameters($length, true, false, false),
-                    new Pwd\Parameters($length, true, true, false),
-                    new Pwd\Parameters($length, true, true, true),
-                ) as $parameters
-            ): ?>
-                <p>
-                    <?php $pwd = $service->generate($parameters); ?>
+            <?php try {
+                foreach (
+                    array(
+                        new Pwd\Parameters($length, true, false, false),
+                        new Pwd\Parameters($length, true, true, false),
+                        new Pwd\Parameters($length, true, true, true),
+                    ) as $parameters
+                ): ?>
+                    <p>
+                        <?php $pwd = $service->generate($parameters); ?>
 
-                    <span
-                        data-length="<?= $length ?>"
-                        data-number="<?= json_encode($parameters->isNumber()) ?>"
-                        data-mark="<?= json_encode($parameters->isMark()) ?>"
-                        data-extra="<?= json_encode($parameters->isExtra()) ?>"
-                        class="pwd js-clipboard"><?= $pwd ?></span>
-                </p>
-            <?php endforeach; ?>
+                        <span
+                            data-length="<?= $length ?>"
+                            data-number="<?= json_encode($parameters->isNumber()) ?>"
+                            data-mark="<?= json_encode($parameters->isMark()) ?>"
+                            data-extra="<?= json_encode($parameters->isExtra()) ?>"
+                            class="pwd js-clipboard"><?= $pwd ?></span>
+                    </p>
+                <?php endforeach;
+            } catch (Pwd\ParametersException $e) {
+                die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()));
+            } ?>
         <?php endforeach; ?>
     </div>
 
