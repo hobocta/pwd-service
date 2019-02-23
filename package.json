@@ -1,0 +1,30 @@
+{
+  "name": "pwd",
+  "version": "1.0.0",
+  "description": "pwd-service",
+  "main": "",
+  "dependencies": {
+    "clipboard": "^2.0.4",
+    "jquery": "^3.3.1",
+    "noty": "^3.2.0-beta"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hobocta/pwd-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hobocta/pwd-service/issues"
+  },
+  "homepage": "https://github.com/hobocta/pwd-service#readme"
+}

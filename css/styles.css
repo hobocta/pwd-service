@@ -23,6 +23,12 @@ h3 {
 
 .pwd {
     cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #8da6ce;
+    padding: 0;
+    font-family: 'Consolas', 'Courier New', sans-serif;
+    font-size: 100%;
 }
 
 .pwd:hover {
@@ -33,11 +39,22 @@ h3 {
     color: #54ce3c;
 }
 
-html.no-clipboard .note {
-    visibility: hidden;
+#noty_layout__topCenter {
+    top: 1.7em !important;
+    font-size: 90%;
+    width: auto !important;
+    min-width: 239px;
 }
 
-html.no-clipboard .pwd:hover {
-    color: inherit;
-    cursor: inherit;
+.noty_theme__relax.noty_bar .noty_body {
+    padding: .5em !important;
+}
+
+.noty_theme__relax.noty_bar {
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+.noty_theme__relax.noty_type__success {
+    border: 0 !important;
 }

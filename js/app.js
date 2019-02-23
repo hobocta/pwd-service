@@ -1,31 +1,32 @@
-/**
- * @var {object} Clipboard
- * @var {boolean} Clipboard.isSupported
- */
+import 'noty/lib/noty.css';
+import 'noty/lib/themes/relax.css';
+
+import $ from 'jquery';
+import Noty from 'noty/lib/noty.js';
+import ClipboardJS from 'clipboard/dist/clipboard.js';
+
 $(function () {
-    var $html = $('html');
-
-    // noinspection JSValidateTypes
-    if (!Clipboard.isSupported()) {
-        $html.addClass('no-clipboard');
-    }
-
-    // noinspection JSUnresolvedFunction
-    var clipboard = new Clipboard('.js-clipboard', {
+    let clipboard = new ClipboardJS('.js-clipboard', {
         text: function (trigger) {
-            var $trigger = $(trigger);
+            let $trigger = $(trigger);
 
             return $trigger.text();
         }
     });
 
+    // noinspection JSUnresolvedFunction
     clipboard.on('success', function (event) {
-        var $item = $(event.trigger);
+        let $item = $(event.trigger);
 
         $item
             .addClass('copied')
             .alert(event.text)
             .getPwd();
+    });
+
+    // noinspection JSUnresolvedFunction
+    clipboard.on('error', function (event) {
+        console.error(event);
     });
 
     /**
@@ -35,7 +36,7 @@ $(function () {
      * @returns {$}
      */
     $.fn.alert = function (copiedText) {
-        var text;
+        let text;
 
         if (typeof copiedText === 'undefined') {
             text = 'Пароль скопирован';
@@ -43,19 +44,15 @@ $(function () {
             text = 'Скопирован пароль ' + copiedText;
         }
 
-        noty({
-            layout: 'topCenter',
-            type: 'success',
+        // noinspection JSUnresolvedFunction
+        new Noty({
             text: text,
-            timeout: 1500,
-            maxVisible: 3,
-            animation: {
-                open: {height: 'toggle'},
-                close: {height: 'toggle'},
-                easing: 'swing',
-                speed: 100
-            }
-        });
+            layout: 'topCenter',
+            theme: 'relax',
+            type: 'success',
+            timeout: 250,
+            progressBar: false
+        }).show();
 
         return this;
     };
@@ -66,8 +63,9 @@ $(function () {
      * @returns {$}
      */
     $.fn.getPwd = function () {
-        var $item = $(this);
+        let $item = $(this);
 
+        // noinspection JSUnusedGlobalSymbols
         $.ajax({
             url: 'ajax/get-pwd.php',
             data: {
@@ -86,7 +84,7 @@ $(function () {
                     setTimeout(function () {
                         $item.removeClass('copied');
                         $item.text(data.pwd);
-                    }, 1700);
+                    }, 500);
                 } else {
                     alert('Error');
                 }

@@ -33,12 +33,12 @@ require_once 'src/autoload.php';
                     <p>
                         <?php $pwd = $service->generate($parameters); ?>
 
-                        <span
+                        <button
                             data-length="<?= $length ?>"
                             data-number="<?= json_encode($parameters->isNumber()) ?>"
                             data-mark="<?= json_encode($parameters->isMark()) ?>"
                             data-extra="<?= json_encode($parameters->isExtra()) ?>"
-                            class="pwd js-clipboard"><?= $pwd ?></span>
+                            class="pwd js-clipboard"><?= $pwd ?></button>
                     </p>
                 <?php endforeach;
             } catch (Pwd\ParametersException $e) {
@@ -47,10 +47,7 @@ require_once 'src/autoload.php';
         <?php endforeach; ?>
     </div>
 
-    <script src="js/vendor/jquery.min.js"></script>
-    <script src="js/vendor/jquery.noty.packaged.min.js"></script>
-    <script src="js/vendor/clipboard.min.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="dist/app.js"></script>
 
     <?php $include = 'more/include.php'; ?>
     <?php if (file_exists($include)): ?>
