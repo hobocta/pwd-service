@@ -1,5 +1,5 @@
 body {
-    font-family: 'Consolas', 'Courier New', sans-serif;
+    font-family: monospace, sans-serif;
     position: relative;
     min-width: 360px;
     color: #8da6ce;
@@ -27,7 +27,7 @@ h3 {
     border: none;
     color: #8da6ce;
     padding: 0;
-    font-family: 'Consolas', 'Courier New', sans-serif;
+    font-family: monospace, sans-serif;
     font-size: 100%;
 }
 
