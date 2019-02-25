@@ -35,6 +35,10 @@ h3 {
     color: #54ce3c;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
 #noty_layout__topCenter {
     top: 1.7em !important;
     font-size: 90%;

@@ -41,7 +41,7 @@ $(function () {
         if (typeof copiedText === 'undefined') {
             text = 'Пароль скопирован';
         } else {
-            text = 'Скопирован пароль ' + copiedText;
+            text = 'Скопирован пароль <span class="nowrap">' + copiedText + '</span>';
         }
 
         // noinspection JSUnresolvedFunction
