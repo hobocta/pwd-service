@@ -31,10 +31,6 @@ h3 {
     font-size: 100%;
 }
 
-.pwd:hover {
-    color: #d8fa3c;
-}
-
 .pwd.copied {
     color: #54ce3c;
 }
@@ -57,4 +53,6 @@ h3 {
 
 .noty_theme__relax.noty_type__success {
     border: 0 !important;
+    background: #0c1021 !important;
+    color: #54ce3c !important;
 }
