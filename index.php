@@ -49,7 +49,9 @@ require_once 'src/autoload.php';
         <?php endforeach; ?>
     </div>
 
-    <script src="dist/app.js"></script>
+    <?php foreach (['dist/app.js'] as $file): ?>
+        <script src="<?= $file ?>?<?= filemtime(__DIR__ . '/' . $file) ?>"></script>
+    <?php endforeach; ?>
 
     <?php $include = 'more/include.php'; ?>
     <?php if (file_exists($include)): ?>
