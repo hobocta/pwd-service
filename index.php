@@ -10,7 +10,9 @@ require_once 'src/autoload.php';
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Online генератор паролей</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <?php foreach (['css/styles.css'] as $file): ?>
+        <link rel="stylesheet" href="<?= $file ?>?<?= filemtime(__DIR__ . '/' . $file) ?>">
+    <?php endforeach; ?>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 </head>
 <body>
