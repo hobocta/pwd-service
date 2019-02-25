@@ -1,0 +1,22 @@
+#noty_layout__topCenter {
+    top: 1.7em !important;
+    font-size: 90%;
+    width: auto !important;
+    min-width: 100%;
+    text-align: center  ;
+}
+
+.noty_theme__relax.noty_bar .noty_body {
+    padding: .5em !important;
+}
+
+.noty_theme__relax.noty_bar {
+    margin: 0 !important;
+    border-radius: 0 !important;
+}
+
+.noty_theme__relax.noty_type__success {
+    border: 0 !important;
+    background: #0c1021 !important;
+    color: #54ce3c !important;
+}

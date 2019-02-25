@@ -1,6 +1,6 @@
 pwd-service
 ===========
 
-Online генератор паролей.
+Password generator
 
-Вживую можно посмотреть тут - http://pwd.site-home.ru/
+Demo: http://pwd.site-home.ru/
