@@ -1,24 +1,24 @@
-import $ from 'jquery';
 import Noty from 'noty/lib/noty.js';
 import ClipboardJS from 'clipboard/dist/clipboard.js';
+import nocache from 'superagent-no-cache';
+import request from 'superagent';
 
-$(function () {
+!function () {
     let clipboard = new ClipboardJS('.js-clipboard', {
         text: function (trigger) {
-            let $trigger = $(trigger);
-
-            return $trigger.text();
+            return trigger.innerText;
         }
     });
 
     // noinspection JSUnresolvedFunction
     clipboard.on('success', function (event) {
-        let $item = $(event.trigger);
+        let item = event.trigger;
 
-        $item
-            .addClass('copied')
-            .alert(event.text)
-            .getPwd();
+        item.className += ' copied';
+
+        showNoty(event.text);
+
+        loadPwd(item);
     });
 
     // noinspection JSUnresolvedFunction
@@ -26,7 +26,7 @@ $(function () {
         console.error(event);
     });
 
-    $.fn.alert = function (pwd) {
+    function showNoty(pwd) {
         let text = 'Copied: <span class="nowrap">' + pwd + '</span>';
 
         // noinspection JSUnresolvedFunction
@@ -38,39 +38,34 @@ $(function () {
             timeout: 1000,
             progressBar: false
         }).show();
+    }
 
-        return this;
-    };
+    function loadPwd(item) {
+        let data = {
+            length: item.dataset.length,
+            number: item.dataset.number,
+            mark: item.dataset.mark,
+            extra: item.dataset.extra
+        };
 
-    $.fn.getPwd = function () {
-        let $item = $(this);
-
-        // noinspection JSUnusedGlobalSymbols
-        $.ajax({
-            url: 'ajax/get-pwd.php',
-            data: {
-                length: $item.data('length'),
-                number: $item.data('number'),
-                mark: $item.data('mark'),
-                extra: $item.data('extra')
-            },
-            dataType: 'json',
-            /**
-             * @param {boolean} data.error
-             * @param {string} data.pwd
-             */
-            success: function (data) {
-                if (!data.error && data.pwd) {
-                    setTimeout(function () {
-                        $item.removeClass('copied');
-                        $item.text(data.pwd);
-                    }, 1000);
+        request
+            .get('/ajax/get-pwd.php')
+            .query(data)
+            .use(nocache)
+            .set('accept', 'json')
+            .end((error, result) => {
+                if (error) {
+                    console.error('error', error);
                 } else {
-                    alert('Error');
+                    if (result.body.error) {
+                        console.error('error', result.body.message);
+                    } else {
+                        setTimeout(function () {
+                            item.innerText = result.body.pwd;
+                            item.classList.remove('copied');
+                        }, 1000);
+                    }
                 }
-            }
-        });
-
-        return this;
-    };
-});
+            });
+    }
+}();

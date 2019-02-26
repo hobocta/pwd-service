@@ -5,9 +5,10 @@
   "main": "",
   "dependencies": {
     "clipboard": "^2.0.4",
-    "jquery": "^3.3.1",
     "normalize.css": "^8.0.1",
-    "noty": "^3.2.0-beta"
+    "noty": "^3.2.0-beta",
+    "superagent": "^4.1.0",
+    "superagent-no-cache": "^0.1.1"
   },
   "devDependencies": {
     "css-loader": "^0.28.11",
@@ -17,6 +18,7 @@
   },
   "scripts": {
     "webpack": "webpack",
+    "watch": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
