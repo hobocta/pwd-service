@@ -9,7 +9,7 @@ require_once 'src/autoload.php';
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Online генератор паролей</title>
+    <title>Password generator online</title>
     <?php foreach (array('dist/app.css') as $file): ?>
         <link rel="stylesheet" href="<?= $file ?>?<?= filemtime(__DIR__ . '/' . $file) ?>">
     <?php endforeach; ?>
@@ -17,7 +17,7 @@ require_once 'src/autoload.php';
 </head>
 <body>
     <div class="wrap">
-        <p class="note">Кликни, чтобы скопировать</p>
+        <p class="note">Click to copy</p>
 
         <?php foreach (array(12, 14, 16) as $length): ?>
             <h3><?= $length ?></h3>

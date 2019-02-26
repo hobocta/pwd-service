@@ -1,6 +1,6 @@
 pwd-service
 ===========
 
-Password generator
+Password generator online
 
 Demo: http://pwd.site-home.ru/

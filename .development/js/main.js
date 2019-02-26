@@ -26,20 +26,8 @@ $(function () {
         console.error(event);
     });
 
-    /**
-     * Выводит уведомление
-     *
-     * @param copiedText
-     * @returns {$}
-     */
-    $.fn.alert = function (copiedText) {
-        let text;
-
-        if (typeof copiedText === 'undefined') {
-            text = 'Пароль скопирован';
-        } else {
-            text = 'Скопирован пароль <span class="nowrap">' + copiedText + '</span>';
-        }
+    $.fn.alert = function (pwd) {
+        let text = 'Copied: <span class="nowrap">' + pwd + '</span>';
 
         // noinspection JSUnresolvedFunction
         new Noty({
@@ -54,11 +42,6 @@ $(function () {
         return this;
     };
 
-    /**
-     * Получает новый пароль
-     *
-     * @returns {$}
-     */
     $.fn.getPwd = function () {
         let $item = $(this);
 
