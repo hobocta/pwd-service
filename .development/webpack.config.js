@@ -1,28 +1,33 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+process.env.NODE_ENV = "'production'";
 
 module.exports = {
     mode: 'production',
     entry: ['./js/main.js', './css/main.css'],
     output: {
         path: path.resolve(__dirname, '../dist'),
-        filename: 'app.js'
+        filename: '[name].[contenthash].js'
     },
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        {loader: 'css-loader', options: {minimize: true}},
-                    ]
-                })
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    'css-loader'
+                ]
             }
         ],
     },
     plugins: [
-        new ExtractTextPlugin( {
-            filename: 'app.css',
+        new MiniCssExtractPlugin({
+            filename: "[name].[contenthash].css"
         }),
+        new OptimizeCSSAssetsPlugin
     ]
 };

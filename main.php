@@ -3,6 +3,9 @@
 use Hobocta\Pwd;
 
 require_once 'src/autoload.php';
+
+$assetsDir = '/dist';
+$assetsFiles = scandir(__DIR__ . $assetsDir);
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,8 +13,9 @@ require_once 'src/autoload.php';
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Password generator online</title>
-    <?php foreach (array('dist/app.css') as $file): ?>
-        <link rel="stylesheet" href="<?= $file ?>?<?= filemtime(__DIR__ . '/' . $file) ?>">
+    <?php foreach ($assetsFiles as $file): ?>
+        <?php if (!preg_match( '~\.css$~', $file)) continue; ?>
+        <link rel="stylesheet" href="<?= $assetsDir . '/' . $file ?>">
     <?php endforeach; ?>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 </head>
@@ -50,9 +54,12 @@ require_once 'src/autoload.php';
     </div>
 
     <?php foreach (array('dist/app.js') as $file): ?>
-        <script src="<?= $file ?>?<?= filemtime(__DIR__ . '/' . $file) ?>"></script>
-    <?php endforeach; ?>
 
+    <?php endforeach; ?>
+    <?php foreach ($assetsFiles as $file): ?>
+        <?php if (!preg_match( '~\.js$~', $file)) continue; ?>
+        <script src="<?= $assetsDir . '/' . $file ?>"></script>
+    <?php endforeach; ?>
     <?php $include = 'more/include.php'; ?>
     <?php if (file_exists($include)): ?>
         <?php
