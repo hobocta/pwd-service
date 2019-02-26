@@ -3,7 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     mode: 'production',
-    entry: ['./js/app.js'],
+    entry: ['./js/main.js', './js/styles.js'],
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'app.js'
