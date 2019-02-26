@@ -52,7 +52,7 @@ $(function () {
             layout: 'topCenter',
             theme: 'relax',
             type: 'success',
-            timeout: 250,
+            timeout: 750,
             progressBar: false
         }).show();
 
@@ -86,7 +86,7 @@ $(function () {
                     setTimeout(function () {
                         $item.removeClass('copied');
                         $item.text(data.pwd);
-                    }, 500);
+                    }, 750);
                 } else {
                     alert('Error');
                 }
