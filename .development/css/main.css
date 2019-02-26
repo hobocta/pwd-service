@@ -1,39 +1,5 @@
-body {
-    font-family: monospace, monospace;
-    position: relative;
-    color: #8da6ce;
-    background-color: #0c1021;
-}
-
-h3 {
-    color: #f8f8b8;
-}
-
-.wrap {
-    width: 10em;
-    margin: 2em auto 0;
-}
-
-.note {
-    font-size: 90%;
-    padding: 0 0 .5em 0;
-    color: #d8fa3c;
-}
-
-.pwd {
-    cursor: pointer;
-    background: transparent;
-    border: none;
-    color: #8da6ce;
-    padding: 0;
-    font-family: monospace, monospace;
-    font-size: 100%;
-}
-
-.pwd.copied {
-    color: #54ce3c;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
+@import "../node_modules/normalize.css/normalize.css";
+@import "styles.css";
+@import "noty.css";
+@import "../node_modules/noty/lib/noty.css";
+@import "../node_modules/noty/lib/themes/relax.css";
