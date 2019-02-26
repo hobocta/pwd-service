@@ -53,9 +53,6 @@ $assetsFiles = scandir(__DIR__ . $assetsDir);
         <?php endforeach; ?>
     </div>
 
-    <?php foreach (array('dist/app.js') as $file): ?>
-
-    <?php endforeach; ?>
     <?php foreach ($assetsFiles as $file): ?>
         <?php if (!preg_match( '~\.js$~', $file)) continue; ?>
         <script src="<?= $assetsDir . '/' . $file ?>"></script>
