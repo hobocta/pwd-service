@@ -11,11 +11,12 @@
     "superagent-no-cache": "^0.1.1"
   },
   "devDependencies": {
-    "css-loader": "^2.1.0",
+    "css-loader": "^2.1.1",
+    "js-yaml": "^3.13.1",
     "mini-css-extract-plugin": "^0.5.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3"
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.4"
   },
   "scripts": {
     "webpack": "webpack",
