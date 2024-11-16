@@ -5,6 +5,7 @@
   "main": "",
   "dependencies": {
     "clipboard": "^2.0.11",
+    "loader-utils": "^1.4.2",
     "normalize.css": "^8.0.1",
     "noty": "^3.2.0-beta-deprecated",
     "superagent": "^4.1.0",
