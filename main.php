@@ -23,7 +23,7 @@ $assetsFiles = scandir(__DIR__ . $assetsDir);
     <div class="wrap">
         <p class="note">Click to copy</p>
 
-        <?php foreach (array(12, 14, 16) as $length): ?>
+        <?php foreach (array(12, 16, 20) as $length): ?>
             <h3><?= $length ?></h3>
 
             <?php $service = new Pwd\Service(new Pwd\Generator); ?>

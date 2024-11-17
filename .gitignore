@@ -2,3 +2,4 @@
 /yandex_*.html
 /robots.txt
 /.development/node_modules/
+/.idea/
