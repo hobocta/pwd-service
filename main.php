@@ -4,8 +4,8 @@ use Hobocta\Pwd;
 
 require_once 'src/autoload.php';
 
-$assetsDir = '/dist';
-$assetsFiles = scandir(__DIR__ . $assetsDir);
+$assetsDir = 'dist';
+$assetsFiles = scandir(__DIR__ . '/' . $assetsDir);
 ?>
 <!DOCTYPE html>
 <html>
