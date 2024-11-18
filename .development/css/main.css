@@ -1,5 +1,5 @@
 @import "../node_modules/normalize.css/normalize.css";
 @import "styles.css";
 @import "noty.css";
-@import "../node_modules/noty/lib/noty.css";
-@import "../node_modules/noty/lib/themes/relax.css";
+@import "../node_modules/notyf/notyf.min.css";
+/* @import "../node_modules/noty/lib/themes/relax.css"; */

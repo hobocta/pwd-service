@@ -7,11 +7,12 @@
     "clipboard": "^2.0.11",
     "loader-utils": "^3.3.1",
     "normalize.css": "^8.0.1",
-    "noty": "^3.2.0-beta-deprecated",
+    "notyf": "^3.10.0",
     "superagent": "^10.1.1",
     "superagent-no-cache": "^0.1.1"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
     "mini-css-extract-plugin": "^2.9.2",

@@ -1,10 +1,10 @@
-import Noty from 'noty/lib/noty.js';
+import {Notyf} from 'notyf';
 import ClipboardJS from 'clipboard/dist/clipboard.js';
 import nocache from 'superagent-no-cache';
 import request from 'superagent';
 
 !function () {
-    let clipboard = new ClipboardJS('.js-clipboard', {
+    const clipboard = new ClipboardJS('.js-clipboard', {
         text: function (trigger) {
             return trigger.innerText;
         }
@@ -16,7 +16,7 @@ import request from 'superagent';
 
         item.className += ' copied';
 
-        showNoty(event.text);
+        showNotyf(event.text);
 
         loadPwd(item);
     });
@@ -26,18 +26,15 @@ import request from 'superagent';
         console.error(event);
     });
 
-    function showNoty(pwd) {
+    const notyf = new Notyf({
+        duration: 12500,
+        position: { x: 'center', y: 'top' }
+    });
+
+    function showNotyf(pwd) {
         let text = 'Copied: <span class="nowrap">' + pwd + '</span>';
 
-        // noinspection JSUnresolvedFunction
-        new Noty({
-            text: text,
-            layout: 'topCenter',
-            theme: 'relax',
-            type: 'success',
-            timeout: 1000,
-            progressBar: false
-        }).show();
+        notyf.open({ message: text });
     }
 
     function loadPwd(item) {

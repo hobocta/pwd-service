@@ -1,22 +1,24 @@
-#noty_layout__topCenter {
-    top: 1.7em !important;
-    font-size: 90%;
-    width: auto !important;
-    min-width: 100%;
-    text-align: center;
+.notyf {
+    top: 1.45em !important;
 }
 
-.noty_theme__relax.noty_bar .noty_body {
-    padding: .5em !important;
-}
-
-.noty_theme__relax.noty_bar {
+.notyf,
+.notyf__wrapper,
+.notyf__toast {
     margin: 0 !important;
+    padding: 0 !important;
     border-radius: 0 !important;
+    box-shadow: initial !important;
 }
 
-.noty_theme__relax.noty_type__success {
+.notyf__message {
+    padding: .4em 3em .4em 1em !important;
     border: 0 !important;
     background: #0c1021 !important;
     color: #54ce3c !important;
+    font-size: 90%;
+    width: auto !important;
+    min-width: 100%;
+    text-align: left;
+    line-height: inherit;
 }
