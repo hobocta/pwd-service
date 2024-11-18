@@ -61,6 +61,7 @@ import request from 'superagent';
                         console.error('error', result.body.message);
                     } else {
                         setTimeout(function () {
+                            // noinspection JSUnresolvedVariable
                             item.innerText = result.body.pwd;
                             item.classList.remove('copied');
                         }, 1000);

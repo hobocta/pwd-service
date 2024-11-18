@@ -5,17 +5,17 @@
   "main": "",
   "dependencies": {
     "clipboard": "^2.0.11",
-    "loader-utils": "^1.4.2",
+    "loader-utils": "^3.3.1",
     "normalize.css": "^8.0.1",
     "noty": "^3.2.0-beta-deprecated",
-    "superagent": "^4.1.0",
+    "superagent": "^10.1.1",
     "superagent-no-cache": "^0.1.1"
   },
   "devDependencies": {
     "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.0",
     "mini-css-extract-plugin": "^2.9.2",
     "minimist": "^1.2.8",
-    "css-minimizer-webpack-plugin": "^7.0.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
   },
