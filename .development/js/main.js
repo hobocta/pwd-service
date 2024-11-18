@@ -27,7 +27,7 @@ import request from 'superagent';
     });
 
     const notyf = new Notyf({
-        duration: 12500,
+        duration: 1500,
         position: { x: 'center', y: 'top' }
     });
 
